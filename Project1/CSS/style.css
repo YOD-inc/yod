@@ -21,13 +21,13 @@ body {
 
 .logo {
 	width:25vmin;
-	
 }
 
 .navbar {
 	width: auto;
-	height: 70px;
+	height: 93px;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+	padding-top:1vmin;
 }
 
 .navbar .container {
