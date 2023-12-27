@@ -1,0 +1,81 @@
+/**
+ * Базовые стили для всего сайта
+ */
+body {
+	position: relative;
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 16px;
+	line-height: 1.4;
+	color: #000;
+	min-width: 320px;
+	overflow-x: hidden;
+	height: auto;
+}
+
+
+/**
+ * Другие стили
+ */
+
+
+
+.logo {
+	width:25vmin;
+	
+}
+
+.navbar {
+	width: auto;
+	height: 70px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+}
+
+.navbar .container {
+	height: inherit;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navbar-menu {
+	list-style-type: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.navbar-menu li {
+	display: inline-block;
+	/* font-weight: 700; */
+	text-decoration: none;
+	color: #000;
+}
+
+.navbar-menu li a {
+	display:inline-block;
+	margin-left: 50px;
+	/* font-weight: 700; */
+	text-decoration: none;
+	color: #000;
+	opacity: 0.6;
+	transition: all .07s ease-in-out;
+}
+.navbar-menu li a:hover {
+	opacity: 1;
+}
+
+.navbar-wrap {
+	display: flex;
+	flex-flow: row nowrap;
+	/* font-weight: 700; */
+	text-decoration: none;
+	color: #000;
+}
+
+.callback {
+	margin-left: 80px;
+	color: #000;
+	text-decoration: none;
+	/* font-weight: 700; */
+
+}
+
