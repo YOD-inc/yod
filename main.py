@@ -6,20 +6,17 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from models import Doctor, Block, Diagnosis, Gender, Inspect, Patient, Place_Insp, Symptoms
 
-
 engine = create_engine("postgresql://postgres:1234@localhost/new_db")
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 app = FastAPI()
 
-metadata = MetaData()
-doctor_table = Table("doctor", metadata, autoload_with=engine)
-
 @app.get("/doctors")
 def get_all_doctors():
     db = SessionLocal()
-    return {"doctors": db.query(Doctor).all()}
+    a = {"doctors": db.query(Doctor).all()}
     db.close()
+    return a
 
 @app.post("/doctors/add")
 async def add_doctor(last_n: str, first_n: str, patro_n: str, phone_num: str, block_id: int, exp: int):
@@ -41,8 +38,9 @@ async def delete_doctor(id: int):
 @app.get("/block")
 def get_all_block():
     db = SessionLocal()
-    return {"block": db.query(Block).all()}
+    a =  {"block": db.query(Block).all()}
     db.close()
+    return a
 
 @app.post("/block/add")
 async def add_block(address: str, block_num: int):
@@ -64,8 +62,9 @@ async def delete_block(id: int):
 @app.get("/diagnosis")
 def get_all_diagnosis():
     db = SessionLocal()
-    return {"diagnosis": db.query(Diagnosis).all()}
+    a =  {"diagnosis": db.query(Diagnosis).all()}
     db.close()
+    return a
 
 @app.post("/diagnosis/add")
 async def add_diagnosis(diagnosis_name: str):
@@ -84,11 +83,19 @@ async def diagnosis_delete(id: int):
     db.close()
     return{"message":"diagnos ydalen"}
 
+@app.get("/gender")
+def get_all_diagnosis():
+    db = SessionLocal()
+    a =  {"gender": db.query(Gender).all()}
+    db.close()
+    return a
+
 @app.get("/inspect")
 def get_all_inspect():
     db = SessionLocal()
-    return {"inspect": db.query(Inspect).all()}
+    a = {"inspect": db.query(Inspect).all()}
     db.close()
+    return a
 
 @app.post("/inspect/add")
 async def add_inspect(place: int, date: date, doctor: int, patient: int, symptom_id: int, diagnosis_id: int, prescriptions: str):
@@ -110,8 +117,9 @@ async def inspect_delete(id: int):
 @app.get("/patient")
 def get_all_patient():
     db = SessionLocal()
-    return {"patient": db.query(Patient).all()}
+    a = {"patient": db.query(Patient).all()}
     db.close()
+    return a
 
 @app.post("/patient/add")
 async def add_patient(last_n: str, first_n: str, patro_n: str, phone_num: str, address: str, age: int, gender_char: str):
@@ -133,14 +141,16 @@ async def inspect_delete(id: int):
 @app.get("/place_insp")
 def get_all_place_insp():
     db = SessionLocal()
-    return {"place_insp": db.query(Place_Insp).all()}
+    a = {"place_insp": db.query(Place_Insp).all()}
     db.close()
+    return a
 
 @app.get("/symptoms")
 def get_all_diagnosis():
     db = SessionLocal()
-    return {"symptom": db.query(Symptoms).all()}
+    a = {"symptom": db.query(Symptoms).all()}
     db.close()
+    return a
 
 @app.post("/symptoms/add")
 async def add_symptom(symptom: str):
@@ -158,4 +168,3 @@ async def symptom_delete(id: int):
     db.commit()
     db.close()
     return{"message":"symptom ydalen"}
-
