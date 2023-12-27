@@ -20,6 +20,7 @@ body {
 
 
 .logo {
+	min-width:250px;
 	width:25vmin;
 }
 
@@ -50,15 +51,6 @@ body {
 	color: #000;
 }
 
-.navbar-menu li a {
-	display:inline-block;
-	margin-left: 50px;
-	/* font-weight: 700; */
-	text-decoration: none;
-	color: #000;
-	opacity: 0.6;
-	transition: all .07s ease-in-out;
-}
 .navbar-menu li a:hover {
 	opacity: 1;
 }
@@ -71,11 +63,14 @@ body {
 	color: #000;
 }
 
-.callback {
-	margin-left: 80px;
-	color: #000;
-	text-decoration: none;
+.navbar-menu li a {
+	padding-right: 50px;
+	display:inline-block;
+	margin-left: 50px;
 	/* font-weight: 700; */
-
+	text-decoration: none;
+	color: #000;
+	opacity: 0.6;
+	transition: all .07s ease-in-out;
 }
 
