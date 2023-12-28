@@ -1,0 +1,112 @@
+/**
+ * Базовые стили для всего сайта
+ */
+body {
+	position: relative;
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 16px;
+	line-height: 1.4;
+	color: #000;
+	min-width: 320px;
+	overflow-x: hidden;
+	height: auto;
+}
+
+/**
+ * Стили для шапки сайта
+ */
+
+.logo {
+	min-width:250px;
+	width:25vmin;
+}
+
+.navbar {
+	width: auto;
+	height: 93px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+	padding-top:1vmin;
+}
+
+.navbar .container {
+	height: inherit;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navbar-menu {
+	list-style-type: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.navbar-menu li {
+	display: inline-block;
+	/* font-weight: 700; */
+	text-decoration: none;
+	color: #000;
+}
+
+.navbar-menu li a:hover {
+	opacity: 1;
+}
+
+.navbar-wrap {
+	display: flex;
+	flex-flow: row nowrap;
+	/* font-weight: 700; */
+	text-decoration: none;
+	color: #000;
+}
+
+.navbar-menu li a {
+	padding-right: 50px;
+	display:inline-block;
+	margin-left: 50px;
+	/* font-weight: 700; */
+	text-decoration: none;
+	color: #000;
+	opacity: 0.6;
+	transition: all .07s ease-in-out;
+}
+/**
+ * Стили для участков
+ */
+
+table {
+	margin-top: 10px;
+	margin-left: 20px;
+	border-spacing: 0 10px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+}
+th {
+	padding: 10px 20px;
+	background: #ff4545;
+	color: #000000;
+	border-right: 2px solid; 
+	font-size: 0.9em;
+}
+td {
+	vertical-align: middle;
+	padding: 10px;
+	font-size: 14px;
+	text-align: center;
+	border-top: 2px solid #ff4545;
+	border-bottom: 2px solid #ff4545;
+	border-right: 2px solid #ff4545;
+}
+
+
+
+.addblockbutton{
+	float: right;
+	margin-left: 900px;
+
+}
+
+.blocktext{
+	float: right;
+	margin-right: 20px;
+}

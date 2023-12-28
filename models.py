@@ -1,10 +1,13 @@
+# Импотртирование библиотек
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, Date, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 
+# Для определения таблиц и моделей одновременно
 Base = declarative_base()
 
+# Создание модели БД
 class Block(Base):
     __tablename__ = "block"
     id = Column(Integer, primary_key=True, index=True)
@@ -30,7 +33,7 @@ class Gender(Base):
     __tablename__ = "gender"
     gender_value = Column(String)
     gender_char = Column(String, primary_key = True)
-    pass
+    
 
 class Inspect(Base):
     __tablename__ = "inspect"
