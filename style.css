@@ -64,21 +64,19 @@ body {
 	padding-right: 50px;
 	display:inline-block;
 	margin-left: 50px;
+	/* font-weight: 700; */
 	text-decoration: none;
 	color: #000;
 	opacity: 0.6;
 	transition: all .07s ease-in-out;
 }
-
 /**
- * Общий стиль таблиц для админов
+ * Стили для участков
  */
 
 table {
-	float: right;
-	position: static;
 	margin-top: 10px;
-	margin-right: 20px;
+	margin-left: 20px;
 	border-spacing: 0 10px;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: bold;
@@ -100,67 +98,15 @@ td {
 	border-right: 2px solid #ff4545;
 }
 
-/**
- * Стили для участков
- */
 
-
-.add_del{
-	margin-left: 20px;
-	margin-top: 10px;
-}
-
-.addblocktext{
-	width: 320px;
-}
 
 .addblockbutton{
-	margin-top: 5px;
-	background: #ff4545;
+	float: right;
+	margin-left: 900px;
+
 }
 
-.delblocktext{
-	width: 120px;
-	margin-top: 5px;
-}
-
-.delblockbutton{
-	margin-top: 5px;
-	background: #ff4545;
-}
-
-/**
- * Стиль таблицы для обычных пользователей
- */
-
-.table-user{
-	float: left;
-	position: static;
-	margin-top: 10px;
-	margin-left: 20px;
-	border-spacing: 0 10px;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: bold;
-}
-/**
- * Стили для Доктор
- */
-
-.add-doctor-text{
-	width: 1000px;
-}
-
-.del-doctor-text{
-	width: 130px;
-	margin-top: 5px;
-}
-
-.deldoctorbutton{
-	margin-top: 5px;
-	background: #ff4545;
-}
-
-.adddoctorbutton{
-	margin-top: 5px;
-	background: #ff4545;
+.blocktext{
+	float: right;
+	margin-right: 20px;
 }
