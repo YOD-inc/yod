@@ -12,12 +12,9 @@ body {
 	height: auto;
 }
 
-
 /**
- * Другие стили
+ * Стили для шапки сайта
  */
-
-
 
 .logo {
 	min-width:250px;
@@ -67,10 +64,103 @@ body {
 	padding-right: 50px;
 	display:inline-block;
 	margin-left: 50px;
-	/* font-weight: 700; */
 	text-decoration: none;
 	color: #000;
 	opacity: 0.6;
 	transition: all .07s ease-in-out;
 }
 
+/**
+ * Общий стиль таблиц для админов
+ */
+
+table {
+	float: right;
+	position: static;
+	margin-top: 10px;
+	margin-right: 20px;
+	border-spacing: 0 10px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+}
+th {
+	padding: 10px 20px;
+	background: #ff4545;
+	color: #000000;
+	border-right: 2px solid; 
+	font-size: 0.9em;
+}
+td {
+	vertical-align: middle;
+	padding: 10px;
+	font-size: 14px;
+	text-align: center;
+	border-top: 2px solid #ff4545;
+	border-bottom: 2px solid #ff4545;
+	border-right: 2px solid #ff4545;
+}
+
+/**
+ * Стили для участков
+ */
+
+
+.add_del{
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+.addblocktext{
+	width: 320px;
+}
+
+.addblockbutton{
+	margin-top: 5px;
+	background: #ff4545;
+}
+
+.delblocktext{
+	width: 120px;
+	margin-top: 5px;
+}
+
+.delblockbutton{
+	margin-top: 5px;
+	background: #ff4545;
+}
+
+/**
+ * Стиль таблицы для обычных пользователей
+ */
+
+.table-user{
+	float: left;
+	position: static;
+	margin-top: 10px;
+	margin-left: 20px;
+	border-spacing: 0 10px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+}
+/**
+ * Стили для Доктор
+ */
+
+.add-doctor-text{
+	width: 1000px;
+}
+
+.del-doctor-text{
+	width: 130px;
+	margin-top: 5px;
+}
+
+.deldoctorbutton{
+	margin-top: 5px;
+	background: #ff4545;
+}
+
+.adddoctorbutton{
+	margin-top: 5px;
+	background: #ff4545;
+}
