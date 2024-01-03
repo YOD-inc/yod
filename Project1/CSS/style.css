@@ -142,8 +142,9 @@ td {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: bold;
 }
+
 /**
- * Стили для Доктор
+ * Стили для докторов
  */
 
 .add-doctor-text{
@@ -161,6 +162,29 @@ td {
 }
 
 .adddoctorbutton{
+	margin-top: 5px;
+	background: #ff4545;
+}
+
+/**
+ * Стили для пациентов
+ */
+
+.add-patient-text{
+	width: 1000px;
+}
+
+.del-patient-text{
+	width: 150px;
+	margin-top: 5px;
+}
+
+.delpatientbutton{
+	margin-top: 5px;
+	background: #ff4545;
+}
+
+.addpatientbutton{
 	margin-top: 5px;
 	background: #ff4545;
 }

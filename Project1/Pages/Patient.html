@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang='ru'>
+
+<head>
+    <link href="../CSS/style.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<title>Пациенты</title>
+</head>
+
+<body>
+	<nav class="navbar">
+		<div class="container">
+			<a href="../index.html"><img src="../Images/logo3.png" alt="Логотип больницы" class="logo"></a>
+			<div class="navbar-wrap">
+				<ul class="navbar-menu">
+					<li><a href="../Pages/BlockAdmin.html">Участки</a></li>
+					<li><a href="../Pages/Inspect.html">Осмотр</a></li>
+					<li><a href="../Pages/DoctorAdmin.html">Врачи</a></li>
+					<li><a href="../Pages/Patient.html">Пациенты</a></li>
+					<li><a href="#" class="callback">О нас</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID пациента</th>
+                    <th>ФИО пациента</th>
+                    <th>Номер телефона</th>     
+                    <th>Адрес проживания</th>
+                    <th>Возраст</th> 
+                    <th>Пол</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#</td>
+                    <td>#</td>
+                    <td>#</td>
+                    <td>#</td>
+                    <td>#</td>
+                    <td>#</td>
+                </tr>
+            </tbody>
+        </table> 
+        <div class="add_del">
+            <div class="add-patient-text">
+                <label for="addlast">Фамилия:</label>
+                <input id="addlast"  type="text" name="addlast"/>
+                <label for="addname">Имя:</label>
+                <input id="addname"  type="text" name="addname"/>
+                <label for="addpatro">Отчество:</label>
+                <input id="addpatro"  type="text" name="addpatro"/>
+                <label for="addphone">Номер телефона:</label>
+                <input id="addphone"  type="text" name="addphone"/>
+                <label for="addstreet">Адрес прожтивания:</label>
+                <input id="addstreet"  type="text" name="addstreet"/>
+                <label for="addage">Возраст:</label>
+                <input id="addage"  type="text" name="addage", size="2"/>
+                <label for="addgender">Пол:</label>
+                <select>
+                    <option>Пункт 1</option>
+                </select>
+            </div>
+            <button type="button" name="addpatientbutton", class="addpatientbutton">Сохранить доктора</button>
+            <div class="del-patient-text">
+                <div class="deldoctor">
+                    <label for="delpatient">ID пациента:</label>
+                    <input id="delpatient"  type="text" name="delpatient", size="2"/>
+                </div>
+            </div>
+            <button type="button" name="delpatientbutton", class="delpatientbutton">Удалить доктора</button>
+        </div>
+    </main>
+</body>
+
+</html>
