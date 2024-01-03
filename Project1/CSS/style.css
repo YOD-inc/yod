@@ -188,3 +188,26 @@ td {
 	margin-top: 5px;
 	background: #ff4545;
 }
+
+/**
+ * Стили для осмотров
+ */
+
+.add-inspect-text{
+	width: 1000px;
+}
+
+.del-inspect-text{
+	width: 200px;
+	margin-top: 5px;
+}
+
+.delinspectbutton{
+	margin-top: 5px;
+	background: #ff4545;
+}
+
+.addinspectbutton{
+	margin-top: 5px;
+	background: #ff4545;
+}
