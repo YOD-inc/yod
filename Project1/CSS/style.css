@@ -19,6 +19,9 @@ body {
 .logo {
 	min-width:250px;
 	width:25vmin;
+	position: absolute;
+	left:0;
+	top:0;
 }
 
 .navbar {
@@ -36,9 +39,15 @@ body {
 }
 
 .navbar-menu {
-	list-style-type: none;
+	/* list-style-type: none;
 	padding-left: 0;
-	margin-left: 0;
+	margin-left: 0; */
+
+	-webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -moz-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
 }
 
 .navbar-menu li {
@@ -84,10 +93,11 @@ table {
 	font-weight: bold;
 }
 th {
-	padding: 10px 20px;
-	background: #ff4545;
+	padding: 10px 25px;
+	background: #ff0000;
 	color: #000000;
 	border-right: 2px solid; 
+	border-left: 2px solid;
 	font-size: 0.9em;
 }
 td {
@@ -95,9 +105,10 @@ td {
 	padding: 10px;
 	font-size: 14px;
 	text-align: center;
-	border-top: 2px solid #ff4545;
-	border-bottom: 2px solid #ff4545;
-	border-right: 2px solid #ff4545;
+	border-top: 2px solid #000000;
+	border-bottom: 2px solid #000000;
+	border-right: 2px solid #000000;
+	border-left: 2px solid #000000;
 }
 
 /**
@@ -116,7 +127,7 @@ td {
 
 .addblockbutton{
 	margin-top: 5px;
-	background: #ff4545;
+	background: #797979;
 }
 
 .delblocktext{
@@ -126,7 +137,7 @@ td {
 
 .delblockbutton{
 	margin-top: 5px;
-	background: #ff4545;
+	background: #797979;
 }
 
 /**
@@ -158,12 +169,12 @@ td {
 
 .deldoctorbutton{
 	margin-top: 5px;
-	background: #ff4545;
+	background: #797979;
 }
 
 .adddoctorbutton{
 	margin-top: 5px;
-	background: #ff4545;
+	background: #797979;
 }
 
 /**
@@ -181,19 +192,25 @@ td {
 
 .delpatientbutton{
 	margin-top: 5px;
-	background: #ff4545;
+	background: #797979;
 }
 
 .addpatientbutton{
 	margin-top: 5px;
-	background: #ff4545;
+	background: #797979;
+}
+
+.name-pages{
+	color:black;
+	font-weight: 700;
+	font-size: 23px;
 }
 
 /**
  * Стили для осмотров
  */
 
-.add-inspect-text{
+ .add-inspect-text{
 	width: 1000px;
 }
 

@@ -5,10 +5,8 @@
     <link href="../CSS/style.css" rel="stylesheet">
 	<meta charset="utf-8">
 	<title>Пациенты</title>
-</head>
 
-<body>
-	<nav class="navbar">
+    <nav class="navbar">
 		<div class="container">
 			<a href="../index.html"><img src="../Images/logo3.png" alt="Логотип больницы" class="logo"></a>
 			<div class="navbar-wrap">
@@ -17,11 +15,14 @@
 					<li><a href="../Pages/Inspect.html">Осмотр</a></li>
 					<li><a href="../Pages/DoctorAdmin.html">Врачи</a></li>
 					<li><a href="../Pages/Patient.html">Пациенты</a></li>
-					<li><a href="#" class="callback">О нас</a></li>
+					<li><a href="../Pages/Block.html" class="callback">О нас</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+</head>
+
+<body>
     <main>
         <table>
             <thead>
@@ -91,17 +92,3 @@
 </body>
 
 </html>
-
-<!--
-    class Inspect(Base):
-    __tablename__ = "inspect"
-    id = Column(Integer, primary_key=True, index=True)
-    place = Column(String)
-    date = Column(Date)
-    doctor = Column(Integer, ForeignKey("doctor.id"))
-    patient = Column(Integer, ForeignKey("patient.id"))
-    symptom_id = Column(String)
-    diagnosis_id = Column(String)
-    prescriptions = Column(String)
-
--->

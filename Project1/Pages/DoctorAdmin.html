@@ -4,10 +4,8 @@
 <head>
     <link href="../CSS/style.css" rel="stylesheet">
 	<meta charset="utf-8">
-	<title>Докторы</title>
-</head>
+	<title>Врачи</title>
 
-<body>
     <nav class="navbar">    
         <div class="container">
             <a href="../index.html"><img src="../Images/logo3.png" alt="Логотип больницы" class="logo"></a>
@@ -17,11 +15,17 @@
                     <li><a href="../Pages/Inspect.html">Осмотр</a></li>
                     <li><a href="../Pages/DoctorAdmin.html">Врачи</a></li>
                     <li><a href="../Pages/Patient.html">Пациенты</a></li>
-                    <li><a href="#" class="callback">О нас</a></li>
+                    <li><a href="../Pages/Block.html" class="callback">О нас</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+</head>
+
+<body>
+    <div class="name-pages">
+        Врачи
+    </div>
     <main>
         <table>
             <thead>
@@ -46,19 +50,19 @@
         <div class="add_del">
             <div class="add-doctor-text">
                 <label for="addlast">Фамилия:</label>
-                <input id="addlast"  type="text" name="addlast"/>
+                <input id="addlast"  type="text" name="addlast"/><br><br>
                 <label for="addname">Имя:</label>
-                <input id="addname"  type="text" name="addname"/>
+                <input id="addname"  type="text" name="addname"/><br><br>
                 <label for="addpatro">Отчество:</label>
-                <input id="addpatro"  type="text" name="addpatro"/>
+                <input id="addpatro"  type="text" name="addpatro"/><br><br>
                 <label for="addphone">Номер телефона:</label>
-                <input id="addphone"  type="text" name="addphone"/>
+                <input id="addphone"  type="text" name="addphone"/><br><br>
                 <label for="addblock">Номер участка:</label>
-                <input id="addblock"  type="text" name="addblock", size="2"/>
+                <input id="addblock"  type="text" name="addblock", size="2"/><br><br>
                 <label for="addexp">Опыт работы:</label>
-                <input id="addexp"  type="text" name="addexp", size="2"/>
+                <input id="addexp"  type="text" name="addexp", size="2"/><br>
             </div>
-            <button type="button" name="adddoctorbutton", class="adddoctorbutton">Сохранить доктора</button>
+            <button type="button" name="adddoctorbutton", class="adddoctorbutton">Сохранить доктора</button><br><br>
             <div class="del-doctor-text">
                 <div class="deldoctor">
                     <label for="deldoctor">ID доктора:</label>
