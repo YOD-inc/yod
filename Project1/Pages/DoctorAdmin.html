@@ -6,6 +6,9 @@
 	<meta charset="utf-8">
 	<title>Врачи</title>
 
+    <link rel="stylesheet" href="libs/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-grid.min.css">
+
     <nav class="navbar">    
         <div class="container">
             <a href="../index.html"><img src="../Images/logo3.png" alt="Логотип больницы" class="logo"></a>
@@ -73,7 +76,11 @@
                 </div>
             </div>
             <button type="button" name="deldoctorbutton", class="deldoctorbutton">Удалить доктора</button>
-        </div>
+        </div><br>
+        <textarea id="responseTextArea" rows="10" cols="50"></textarea>
+        <button id="addpatientbutton"> Make </button>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="app.js"></script>
     </main>
 </body>
 <footer >

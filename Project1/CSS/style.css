@@ -10,6 +10,7 @@ body {
 	min-width: 320px;
 	overflow-x: hidden;
 	height: auto;
+	font-size: calc(var(--index) * .8);
 	/* background-color: #d9fcd9; */
 
 	background-image: url('https://i2.wp.com/files.123freevectors.com/wp-content/original/115325-abstract-blue-and-green-lights-background-image.jpg?w=500&q=95');
@@ -296,10 +297,11 @@ td {
 	width: 90%;
 	background-color: rgba(255, 255, 255, 0.6);
 	border-radius: 2vw;
+	font-size: 4vmin;
 }
 
 .maintitle {
-	font-size: 30pt;
+	font-size: 4vmin;
 	padding-left: 2%;
 	padding-top: 5%;
 	padding-right: 4%;
@@ -315,15 +317,14 @@ td {
 .main-title-history {
 	padding-top: 6%;
 	padding-left: 4%;
-	font-size: 24pt;
+	font-size: 4vmin;
 	color: rgba(0, 0, 0, 0.897);
 	width: 60%;
-
 }
 
 .main-title-title_history {
 	padding: 4%;
-	font-size: 19pt;
+	font-size: 2vmin;
 	text-align: justify;
 	color: rgba(0, 0, 0, 0.795);
 	/* width: 80%; */
@@ -340,11 +341,13 @@ td {
 	/* position: relative; */
 	border-radius: 2vw;
 	width: 80%;
+	font-size: 4vmin;
 
 }
 
 .main-map-label {
 	margin: 2%;
+	font-size: 4vmin;
 }
 
 .main-map {
@@ -352,6 +355,7 @@ td {
 	/* flex-direction: column;*/
 	/* padding-top: 15%; */
 	margin-top: 20%;
+	
 }
 
 
