@@ -35,7 +35,7 @@ async def add_doctor(last_n: str, first_n: str, patro_n: str, phone_num: str, bl
 @app.delete("/doctors/delete/{id}", tags=["doctors"])
 async def delete_doctor(id: int):
     db = SessionLocal()
-    db.query(Doctor).filter(Doctor.id == id).del1ete()
+    db.query(Doctor).filter(Doctor.id == id).delete()
     db.commit()
     db.close()
     return{"message":"vrach ydalen"}
