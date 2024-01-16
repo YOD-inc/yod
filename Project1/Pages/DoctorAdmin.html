@@ -25,6 +25,8 @@
     </nav>
 </head>
 
+
+
 <body>
     <div>
 		<div class="overflow"></div>
@@ -76,13 +78,58 @@
                 </div>
             </div>
             <button type="button" name="deldoctorbutton", class="deldoctorbutton">Удалить доктора</button>
-        </div><br>
-        <textarea id="responseTextArea" rows="10" cols="50"></textarea>
-        <button id="addpatientbutton"> Make </button>
+        </div>
+
+
+        <!-- Поле ввода данных для @app.post -->
+        <br>
+        <label for="name">Фамилия:</label>
+        <input type="text" id="last_name" placeholder="Введите фамилию">
+ 
+        <label for="age">Имя:</label>
+        <input type="text" id="first_name" placeholder="Введите имя">
+ 
+        <button onclick="add_test_user()">ОК</button>
+ 
+        <div id="response"></div>
+ 
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="app.js"></script>
+        <script src="../JavaScript/add_test_users.js"></script>
+   
+
+        <!-- Вывод результата @app.get в таблицу -->
+
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Данные появляются здесь -->
+            </tbody>
+        </table>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../JavaScript/test_users.js"></script>
+
+
+        <!-- Поле ввода данных для @app.delete -->
+        
+       <label for="deleteId">ID тестового пользователя для удаления:</label>
+       <input type="text" id="deleteId" placeholder="Enter user ID">
+
+       <button onclick="deleteUser()">Удалить</button>
+
+       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+       <script src="../JavaScript/delete_test_users.js"></script>
+
     </main>
 </body>
+
+
+
 <footer >
 	<div class="footer">
 		<p class="footer-text-right">

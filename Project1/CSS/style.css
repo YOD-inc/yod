@@ -1,6 +1,7 @@
-/**
- * Базовые стили для всего сайта
- */
+/* 
+Базовые стили для всего сайта 
+*/
+
 body {
 	position: relative;
 	font-family: 'Noto Sans', sans-serif;
@@ -33,7 +34,6 @@ main {
 	flex: 1;
 }
 
-
 .overflow { 
 	min-height: 30px; 
 }
@@ -63,9 +63,11 @@ main {
 	background-position: center;
 } */
 
-/**
- * Стили для шапки сайта
- */
+
+
+/*
+Стили для шапки сайта
+*/
 
 .logo {
 	/* min-width:230px; */
@@ -135,9 +137,11 @@ main {
 	transition: all .07s ease-in-out;
 }
 
-/**
- * Общий стиль таблиц для админов
- */
+
+
+/*
+Стиль таблиц для админов
+*/
 
 table {
 	float: right;
@@ -167,10 +171,11 @@ td {
 	border-left: 2px solid #000000;
 }
 
-/**
- * Стили для участков
- */
 
+
+/*
+Стили для участков
+*/
 
 .add_del{
 	margin-left: 20px;
@@ -196,9 +201,11 @@ td {
 	background: #797979;
 }
 
-/**
- * Стиль таблицы для обычных пользователей
- */
+
+
+/*
+Стиль таблицы для обычных пользователей
+*/
 
 .table-user{
 	float: left;
@@ -210,9 +217,11 @@ td {
 	font-weight: bold;
 }
 
-/**
- * Стили для докторов
- */
+
+
+/*
+Стили для врачей
+*/
 
 .add-doctor-text{
 	width: 1000px;
@@ -233,9 +242,11 @@ td {
 	background: #797979;
 }
 
-/**
- * Стили для пациентов
- */
+
+
+/*
+Стили для пациентов
+*/
 
 .add-patient-text{
 	width: 1000px;
@@ -263,9 +274,11 @@ td {
 	padding-left: 20px;
 }
 
-/**
- * Стили для осмотров
- */
+
+
+/*
+Стили для осмотров
+*/
 
  .add-inspect-text{
 	width: 1000px;
@@ -286,7 +299,11 @@ td {
 	background: #ff4545;
 }
 
-/* стиль для маин страницы */
+
+
+/* 
+Стили для главной страницы 
+*/
 
 .main-text {
 	padding: 2%;
@@ -359,7 +376,10 @@ td {
 }
 
 
-/* footer */
+
+/* 
+Стиль подвала
+*/
 
 .footer {
 	position: relative;

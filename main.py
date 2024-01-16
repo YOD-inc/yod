@@ -4,16 +4,32 @@ from datetime import date
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.ext.declarative import declarative_base
+from fastapi.middleware.cors import CORSMiddleware
+
 
 # Импортирование классов из файла
-from models import Doctor, Block, Diagnosis, Gender, Inspect, Patient, Place_Insp, Symptoms
+from models import Doctor, Block, Diagnosis, Gender, Inspect, Patient, Place_Insp, Symptoms, Test_User, UserInput
+
 
 # Подключение к PostgreSQL
-engine = create_engine("postgresql://postgres:1234@localhost/new_db")
+# engine = create_engine("postgresql://postgres:1234@localhost/new_db")
+engine = create_engine("postgresql://postgres:admin@localhost/test_db")
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 
 # Создание веб-приложения
 app = FastAPI()
+
+
+# Включение CORS механизма
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Запросы
 @app.get("/doctors", tags=["doctors"])
@@ -40,6 +56,8 @@ async def delete_doctor(id: int):
     db.close()
     return{"message":"vrach ydalen"}
 
+
+
 @app.get("/block", tags=["block"])
 def get_all_block():
     db = SessionLocal()
@@ -63,6 +81,8 @@ async def delete_block(id: int):
     db.commit()
     db.close()
     return{"message":"address ydalen"}
+
+
 
 @app.get("/diagnosis", tags=["diagnosis"])
 def get_all_diagnosis():
@@ -88,12 +108,16 @@ async def diagnosis_delete(id: int):
     db.close()
     return{"message":"diagnos ydalen"}
 
+
+
 @app.get("/gender", tags=["gender"])
 def get_all_diagnosis():
     db = SessionLocal()
     a =  {"gender": db.query(Gender).all()}
     db.close()
     return a
+
+
 
 @app.get("/inspect", tags=["inspect"])
 def get_all_inspect():
@@ -119,6 +143,8 @@ async def inspect_delete(id: int):
     db.close()
     return{"message":"inspect ydalen"}
 
+
+
 @app.get("/patient", tags=["patient"])
 def get_all_patient():
     db = SessionLocal()
@@ -143,12 +169,16 @@ async def inspect_delete(id: int):
     db.close()
     return{"message":"patient ydalen"}
 
+
+
 @app.get("/place_insp", tags=["place_insp"])
 def get_all_place_insp():
     db = SessionLocal()
     a = {"place_insp": db.query(Place_Insp).all()}
     db.close()
     return a
+
+
 
 @app.get("/symptoms", tags=["symptoms"])
 def get_all_diagnosis():
@@ -173,3 +203,37 @@ async def symptom_delete(id: int):
     db.commit()
     db.close()
     return{"message":"symptom ydalen"}
+
+
+
+@app.get("/test_users", tags=["test_users"])
+def get_all_test_users():
+    db = SessionLocal()
+    a = {"test_users": db.query(Test_User).all()}
+    db.close()
+    return a
+
+@app.post("/test_users/add", tags=["test_users"])
+def post_data(user_input: UserInput):
+    test_user = Test_User(**user_input.dict())
+
+    db = SessionLocal()
+    db.add(test_user)
+    db.commit()
+    db.refresh(test_user)
+    db.close()
+
+    return {"message": "Data received and stored successfully", "data": user_input.dict()}
+   
+@app.delete("/test_users/delete/{id}", tags=["test_users"])
+def delete_user(test_user_id: int):
+    db = SessionLocal()
+    test_user = db.query(Test_User).filter(Test_User.id == test_user_id).first()
+    if test_user:
+        db.delete(test_user)
+        db.commit()
+        db.close()
+        return {"message": "User deleted successfully"}
+    else:
+        db.close()
+        raise HTTPException(status_code=404, detail="User not found")

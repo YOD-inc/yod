@@ -3,9 +3,12 @@ from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, 
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
+from pydantic import BaseModel
+
 
 # Для определения таблиц и моделей одновременно
 Base = declarative_base()
+
 
 # Создание модели БД
 class Block(Base):
@@ -66,3 +69,13 @@ class Symptoms(Base):
     __tablename__ = "symptoms"
     id = Column(Integer, primary_key=True, index=True)
     symptom = Column(String)
+
+class Test_User(Base):
+    __tablename__ = "test_users"
+    id = Column(Integer, primary_key=True, index=True)
+    last_name = Column(String)
+    first_name = Column(String)
+
+class UserInput(BaseModel):
+    last_name: str
+    first_name: str
