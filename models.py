@@ -70,12 +70,17 @@ class Symptoms(Base):
     id = Column(Integer, primary_key=True, index=True)
     symptom = Column(String)
 
-class Test_User(Base):
-    __tablename__ = "test_users"
+class User(Base):
+    __tablename__ = "user"
     id = Column(Integer, primary_key=True, index=True)
     last_name = Column(String)
     first_name = Column(String)
+    password = Column(String)
+    lvl = Column(Integer, default = 0)
+    user_name = Column(String, unique=True)
 
-class UserInput(BaseModel):
+class UserCreate(BaseModel):
     last_name: str
     first_name: str
+    password: str
+    user_name: str
