@@ -1,19 +1,19 @@
 # Импортирование библиотек
-from fastapi import FastAPI, Depends 
+from fastapi import FastAPI, Depends, HTTPException 
 from datetime import date
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from sqlalchemy.ext.declarative import declarative_base
 from fastapi.middleware.cors import CORSMiddleware
 
 
 # Импортирование классов из файла
-from models import Doctor, Block, Diagnosis, Gender, Inspect, Patient, Place_Insp, Symptoms, Test_User, UserInput
+from models import Doctor, Block, Diagnosis, Gender, Inspect, Patient, Place_Insp, Symptoms, User, UserCreate
 
 
 # Подключение к PostgreSQL
-# engine = create_engine("postgresql://postgres:1234@localhost/new_db")
-engine = create_engine("postgresql://postgres:admin@localhost/test_db")
+engine = create_engine("postgresql://postgres:1234@localhost/new_db")
+# engine = create_engine("postgresql://postgres:admin@localhost/test_db")
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -31,7 +31,64 @@ app.add_middleware(
 )
 
 
+def get_db():
+    db = SessionLocal()
+    try: 
+        yield db
+    finally:
+        db.close()
+
+
 # Запросы
+
+
+
+# @app.post("/users", tags=["Users"])
+# async def get_user(last_name: str, first_name: str, password : str, user_name: str):
+#     db = SessionLocal()
+#     new_user = db.query(User(last_name = last_name, first_name = first_name, password = password, user_name = user_name)).filter(User.user_name == User.user_name).first()
+#     if new_user:
+#         raise HTTPException(status_code=400, detail="Username already registered")
+#     # if db.query(User).filter(User.user_name == user_name) == True:
+#     #     return{"message":"smenite imya usera"}
+#     new_user = User(user_name=User.user_name)
+#     db.add(new_user)
+#     db.commit()
+#     db.close()
+#     return{"message":"user dobavlen"}
+
+@app.post("/users/reg", tags=["Users"])
+async def get_user(last_name: str, first_name: str, password: str, user_name: str):
+    db = SessionLocal()
+    new_user = db.query(User).filter(user_name == User.user_name).first()
+    if new_user:
+        db.close()
+        raise HTTPException(status_code=400, detail="Username already taken")
+    # if db.query(User).filter(User.user_name == user_name) == True:
+    #     return{"message":"smenite imya usera"}
+    else:
+        new_user = User(last_name = last_name, first_name = first_name, password = password, user_name = user_name)
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
+        db.close()
+        return{"message":"User dobavlen"}
+
+@app.post("/users/log", tags=["Users"])
+async def get_user(user_name: str, password: str):
+    db = SessionLocal()
+    check_user = User(user_name = user_name, password = password)
+    check = db.query(User).filter(User.user_name == user_name).first()
+    if check:
+        # check_pass = db.query(User).filter(User.user_name == password)
+        if check_user.password == check.password:
+            return {"message": "Login successful"}
+        else:
+            raise HTTPException(status_code=400, detail="Invalid username or password")
+    else:
+        raise HTTPException(status_code=400, detail="Invalid username or password")
+    pass
+
 @app.get("/doctors", tags=["doctors"])
 def get_all_doctors():
     db = SessionLocal()
@@ -206,34 +263,34 @@ async def symptom_delete(id: int):
 
 
 
-@app.get("/test_users", tags=["test_users"])
-def get_all_test_users():
-    db = SessionLocal()
-    a = {"test_users": db.query(Test_User).all()}
-    db.close()
-    return a
+# @app.get("/test_users", tags=["test_users"])
+# def get_all_test_users():
+#     db = SessionLocal()
+#     a = {"test_users": db.query(Test_User).all()}
+#     db.close()
+#     return a
 
-@app.post("/test_users/add", tags=["test_users"])
-def post_data(user_input: UserInput):
-    test_user = Test_User(**user_input.dict())
+# @app.post("/test_users/add", tags=["test_users"])
+# def post_data(user_input: UserInput):
+#     test_user = Test_User(**user_input.dict())
 
-    db = SessionLocal()
-    db.add(test_user)
-    db.commit()
-    db.refresh(test_user)
-    db.close()
+#     db = SessionLocal()
+#     db.add(test_user)
+#     db.commit()
+#     db.refresh(test_user)
+#     db.close()
 
-    return {"message": "Data received and stored successfully", "data": user_input.dict()}
+#     return {"message": "Data received and stored successfully", "data": user_input.dict()}
    
-@app.delete("/test_users/delete/{id}", tags=["test_users"])
-def delete_user(test_user_id: int):
-    db = SessionLocal()
-    test_user = db.query(Test_User).filter(Test_User.id == test_user_id).first()
-    if test_user:
-        db.delete(test_user)
-        db.commit()
-        db.close()
-        return {"message": "User deleted successfully"}
-    else:
-        db.close()
-        raise HTTPException(status_code=404, detail="User not found")
+# @app.delete("/test_users/delete/{id}", tags=["test_users"])
+# def delete_user(test_user_id: int):
+#     db = SessionLocal()
+#     test_user = db.query(Test_User).filter(Test_User.id == test_user_id).first()
+#     if test_user:
+#         db.delete(test_user)
+#         db.commit()
+#         db.close()
+#         return {"message": "User deleted successfully"}
+#     else:
+#         db.close()
+#         raise HTTPException(status_code=404, detail="User not found")
