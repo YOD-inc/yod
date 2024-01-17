@@ -1,0 +1,13 @@
+body {
+	font-family: Arial, sans-serif;
+}
+
+.container {
+	max-width: 400px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+input {
+	margin-bottom: 10px;
+}
