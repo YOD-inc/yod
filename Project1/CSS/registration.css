@@ -1,5 +1,10 @@
 body {
 	font-family: Arial, sans-serif;
+
+	background-image: url('https://i2.wp.com/files.123freevectors.com/wp-content/original/115325-abstract-blue-and-green-lights-background-image.jpg?w=500&q=95');
+  	background-size: cover;
+  	background-attachment: fixed; 
+  	background-repeat: no-repeat;
 }
 
 .container {
