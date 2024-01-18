@@ -1,4 +1,5 @@
 # Импотртирование библиотек
+
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, Date, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.ext.declarative import declarative_base
@@ -7,10 +8,12 @@ from pydantic import BaseModel
 
 
 # Для определения таблиц и моделей одновременно
+
 Base = declarative_base()
 
 
-# Создание модели БД
+# Определение моделей хранимых данных
+
 class Block(Base):
     __tablename__ = "block"
     id = Column(Integer, primary_key=True, index=True)
@@ -79,8 +82,41 @@ class User(Base):
     lvl = Column(Integer, default = 0)
     user_name = Column(String, unique=True)
 
-class UserCreate(BaseModel):
-    last_name: str
-    first_name: str
-    password: str
-    user_name: str
+
+# Определение моделей вводимых данных
+
+# class BlockCreate(BaseModel):
+#     address: str
+#     block_num: int
+
+# class DoctorCreate(BaseModel):
+#     last_n: str
+#     first_n: str
+#     patro_n: str
+#     phone_num: str
+#     block_id: int
+#     exp: int
+
+# class InspectCreate(BaseModel):
+#     place: str
+#     date: str
+#     doctor: str
+#     patient: str
+#     symptom: str
+#     diagnosis: str
+#     prescriptions: str
+
+# class Patient(BaseModel):
+#     last_n: str
+#     first_n: str
+#     patro_n: str
+#     phone_num: str
+#     address: str
+#     age: int
+#     gender_char: str
+
+# class UserCreate(BaseModel):
+#     last_name: str
+#     first_name: str
+#     password: str
+#     user_name: str

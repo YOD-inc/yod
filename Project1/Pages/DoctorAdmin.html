@@ -37,11 +37,15 @@
         Врачи
     </div>
     <main>
-        <table>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../JavaScript/doctor_endpoints.js"></script>
+
+        <table id="doctor-table">
             <thead>
                 <tr>
-                    <th>ID доктора</th>
-                    <th>ФИО доктора</th>
+                    <th>ID врача</th>
+                    <th>ФИО врача</th>
                     <th>Номер телефона</th>     
                     <th>Номер участка</th>
                     <th>Опыт работы</th> 
@@ -49,11 +53,11 @@
             </thead>
             <tbody>
                 <tr>
+                    <!-- <td>#</td>
                     <td>#</td>
                     <td>#</td>
                     <td>#</td>
-                    <td>#</td>
-                    <td>#</td>
+                    <td>#</td> -->
                 </tr>
             </tbody>
         </table> 
@@ -72,19 +76,19 @@
                 <label for="addexp">Опыт работы:</label>
                 <input id="addexp"  type="text" name="addexp", size="2"/><br>
             </div>
-            <button type="button" name="adddoctorbutton", class="adddoctorbutton">Сохранить доктора</button><br><br>
+            <button type="button" name="adddoctorbutton", class="adddoctorbutton", onclick="doctor_add()">Сохранить врача</button><br><br>
             <div class="del-doctor-text">
                 <div class="deldoctor">
-                    <label for="deldoctor">ID доктора:</label>
+                    <label for="deldoctor">ID врача:</label>
                     <input id="deldoctor"  type="text" name="deldoctor", size="2"/>
                 </div>
             </div>
-            <button type="button" name="deldoctorbutton", class="deldoctorbutton">Удалить доктора</button>
+            <button type="button" name="deldoctorbutton", class="deldoctorbutton", onclick="doctor_delete()">Удалить врача</button>
         </div>
 
 
         <!-- Поле ввода данных для @app.post -->
-        <br>
+        <!-- <br>
         <label for="name">Фамилия:</label>
         <input type="text" id="last_name" placeholder="Введите фамилию">
  
@@ -96,12 +100,12 @@
         <div id="response"></div>
  
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../JavaScript/add_test_users.js"></script>
+        <script src="../JavaScript/add_test_users.js"></script> -->
    
 
         <!-- Вывод результата @app.get в таблицу -->
 
-        <table id="data-table">
+        <!-- <table id="data-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -109,23 +113,23 @@
                     <th>Имя</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> -->
                 <!-- Данные появляются здесь -->
-            </tbody>
+            <!-- </tbody>
         </table>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../JavaScript/test_users.js"></script>
+        <script src="../JavaScript/test_users.js"></script> -->
 
 
         <!-- Поле ввода данных для @app.delete -->
         
-       <label for="deleteId">ID тестового пользователя для удаления:</label>
+       <!-- <label for="deleteId">ID тестового пользователя для удаления:</label>
        <input type="text" id="deleteId" placeholder="Enter user ID">
 
        <button onclick="deleteUser()">Удалить</button>
 
        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-       <script src="../JavaScript/delete_test_users.js"></script>
+       <script src="../JavaScript/delete_test_users.js"></script> -->
 
     </main>
 </body>

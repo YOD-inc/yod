@@ -5,6 +5,7 @@ from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from sqlalchemy.ext.declarative import declarative_base
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import select, literal_column, join
 
 
 # Импортирование классов из файла
@@ -21,7 +22,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 app = FastAPI()
 
 
-# Включение CORS механизма
+# Подключение CORS механизма
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -31,17 +32,15 @@ app.add_middleware(
 )
 
 
-def get_db():
-    db = SessionLocal()
-    try: 
-        yield db
-    finally:
-        db.close()
+# def get_db():
+#     db = SessionLocal()
+#     try: 
+#         yield db
+#     finally:
+#         db.close()
 
 
 # Запросы
-
-
 
 # @app.post("/users", tags=["Users"])
 # async def get_user(last_name: str, first_name: str, password : str, user_name: str):
@@ -56,6 +55,9 @@ def get_db():
 #     db.commit()
 #     db.close()
 #     return{"message":"user dobavlen"}
+
+
+# Для пользователей
 
 @app.post("/users/reg", tags=["Users"])
 async def get_user(last_name: str, first_name: str, password: str, user_name: str):
@@ -89,10 +91,29 @@ async def get_user(user_name: str, password: str):
         raise HTTPException(status_code=400, detail="Invalid username or password")
     pass
 
+
+# Для врачей
+
+# @app.get("/doctors", tags=["doctors"])
+# def get_all_doctors():
+#     db = SessionLocal()
+#     a = {"doctor": db.query(Doctor).all()}
+#     db.close()
+#     return a
+
 @app.get("/doctors", tags=["doctors"])
 def get_all_doctors():
     db = SessionLocal()
-    a = {"doctors": db.query(Doctor).all()}
+    a = {"inspect_choice_doctor": db.query(
+        select([
+            Doctor.c.id,
+            (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('full_n'),
+            Doctor.c.phone_num,
+            Doctor.c.block_id,
+            Doctor.c.exp
+        ])
+        .select_from(Doctor)
+    )}
     db.close()
     return a
 
@@ -114,6 +135,7 @@ async def delete_doctor(id: int):
     return{"message":"vrach ydalen"}
 
 
+# Для участков
 
 @app.get("/block", tags=["block"])
 def get_all_block():
@@ -140,6 +162,7 @@ async def delete_block(id: int):
     return{"message":"address ydalen"}
 
 
+# Для диагнозов
 
 @app.get("/diagnosis", tags=["diagnosis"])
 def get_all_diagnosis():
@@ -166,6 +189,7 @@ async def diagnosis_delete(id: int):
     return{"message":"diagnos ydalen"}
 
 
+# Для пола
 
 @app.get("/gender", tags=["gender"])
 def get_all_diagnosis():
@@ -175,6 +199,7 @@ def get_all_diagnosis():
     return a
 
 
+# Для осмотров
 
 @app.get("/inspect", tags=["inspect"])
 def get_all_inspect():
@@ -186,7 +211,7 @@ def get_all_inspect():
 @app.post("/inspect/add", tags=["inspect"])
 async def add_inspect(place: int, date: date, doctor: int, patient: int, symptom_id: int, diagnosis_id: int, prescriptions: str):
     db = SessionLocal()
-    new_inspect= Inspect(place = place, date = date, doctor = doctor, patient = patient, symptom_id = symptom_id, diagnosis_id = diagnosis_id, prescriptions = prescriptions)
+    new_inspect = Inspect(place = place, date = date, doctor = doctor, patient = patient, symptom_id = symptom_id, diagnosis_id = diagnosis_id, prescriptions = prescriptions)
     db.add(new_inspect)
     db.commit()
     db.close()
@@ -200,16 +225,77 @@ async def inspect_delete(id: int):
     db.close()
     return{"message":"inspect ydalen"}
 
+@app.get("/inspect/choice_place", tags=["inspect choices"])
+def inspect_choice():
+    db = SessionLocal()
+    a = {"inspect_choice_place": db.query(
+        select([
+            Place_Insp.c.place,
+        ])
+        .select_from(Place_Insp)
+    )}
+    db.close()
+    return a
+
+@app.get("/inspect/choice_doctor", tags=["inspect choices"])
+def doctor_choice():
+    db = SessionLocal()
+    a = {"inspect_choice_doctor": db.query(
+        select([
+            (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('doctor_full_n')
+        ])
+        .select_from(Doctor)
+    )}
+    db.close()
+    return a
+
+@app.get("/inspect/choice_patient", tags=["inspect choices"])
+def patient_choice():
+    db = SessionLocal()
+    a = {"inspect_choice_patient": db.query(
+        select([
+            (Patient.c.last_n + ' ' + Patient.c.first_n + ' ' + Patient.c.patro_n).label('patient_full_n')
+        ])
+        .select_from(Patient)
+    )}
+    db.close()
+    return a
+
+@app.get("/inspect/choice_symptom", tags=["inspect choices"])
+def symptom_choice():
+    db = SessionLocal()
+    a = {"inspect_choice_symptom": db.query(
+        select([
+            Symptoms.c.symptom,
+        ])
+        .select_from(Symptoms)
+    )}
+    db.close()
+    return a
+
+@app.get("/inspect/choice_diagnosis", tags=["inspect choices"])
+def diagnosis_choice():
+    db = SessionLocal()
+    a = {"inspect_choice_diagnosis": db.query(
+        select([
+            Diagnosis.c.diagnosis_name,
+        ])
+        .select_from(Diagnosis)
+    )}
+    db.close()
+    return a
 
 
-@app.get("/patient", tags=["patient"])
+# Для пациентов
+
+@app.get("/patients", tags=["patient"])
 def get_all_patient():
     db = SessionLocal()
     a = {"patient": db.query(Patient).all()}
     db.close()
     return a
 
-@app.post("/patient/add", tags=["patient"])
+@app.post("/patients/add", tags=["patient"])
 async def add_patient(last_n: str, first_n: str, patro_n: str, phone_num: str, address: str, age: int, gender_char: str):
     db = SessionLocal()
     new_patient = Patient(last_n = last_n, first_n = first_n, patro_n = patro_n, phone_num = phone_num, address = address, age = age, gender_char = gender_char)
@@ -218,7 +304,7 @@ async def add_patient(last_n: str, first_n: str, patro_n: str, phone_num: str, a
     db.close()
     return{"message":"patient dobavlen"}
 
-@app.delete("/patient/delete/{id}", tags=["patient"])
+@app.delete("/patients/delete/{id}", tags=["patient"])
 async def inspect_delete(id: int):
     db = SessionLocal()
     db.query(Patient).filter(Patient.id == id).delete()
@@ -227,6 +313,7 @@ async def inspect_delete(id: int):
     return{"message":"patient ydalen"}
 
 
+# Для мест осмотра
 
 @app.get("/place_insp", tags=["place_insp"])
 def get_all_place_insp():
@@ -236,6 +323,7 @@ def get_all_place_insp():
     return a
 
 
+# Для симптомов
 
 @app.get("/symptoms", tags=["symptoms"])
 def get_all_diagnosis():
@@ -253,7 +341,7 @@ async def add_symptom(symptom: str):
     db.close()
     return{"message":"symptom dobavlen"}
 
-@app.delete("/symptom/delete/{id}", tags=["symptoms"])
+@app.delete("/symptoms/delete/{id}", tags=["symptoms"])
 async def symptom_delete(id: int):
     db = SessionLocal()
     db.query(Symptoms).filter(Symptoms.id == id).delete()

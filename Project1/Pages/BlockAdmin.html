@@ -35,7 +35,11 @@
         Участки
     </div>
     <main>
-        <table>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../JavaScript/block_endpoints.js"></script>
+
+        <table id="block-table">
             <thead>
                 <tr>
                     <th>ID улицы</th>
@@ -45,20 +49,21 @@
             </thead>
             <tbody>
                 <tr>
+                    <!-- <td>#</td>
                     <td>#</td>
-                    <td>#</td>
-                    <td>#</td>
+                    <td>#</td> -->
                 </tr>
             </tbody>
         </table> 
+
         <div class="add_del">
             <div class="addblocktext">
                 <label for="addstreet">Адрес:</label>
                 <input id="addstreet"  type="text" name="addstreet"/><br><br>
                 <label for="addblock">Участок:</label>
                 <input id="addblock"  type="text" name="addblock", size="2"/>
-            </div>
-            <button type="button" name="addblockbutton", class="addblockbutton">Сохранить адрес</button><br><br>
+            </div>  
+            <button type="button" name="addblockbutton", class="addblockbutton", onclick="block_add()">Сохранить адрес</button><br><br>
             
             <div class="delblocktext">
                 <div class="delblock">
@@ -66,10 +71,11 @@
                     <input id="delblock"  type="text" name="delblock", size="2"/>
                 </div>
             </div>
-            <button type="button" name="delblockbutton", class="delblockbutton">Удалить адрес</button>
+            <button type="button" name="delblockbutton", class="delblockbutton", onclick="block_delete()">Удалить адрес</button>
         </div>
     </main>
 </body>
+
 <footer >
 	<div class="footer">
 		<p class="footer-text-right">
