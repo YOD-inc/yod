@@ -25,7 +25,15 @@
 					<li><a href="Pages/Inspect.html">Осмотры</a></li>
 					<li><a href="Pages/DoctorAdmin.html">Врачи</a></li>
 					<li><a href="Pages/Patient.html">Пациенты</a></li>
-					<li><a href="Pages/Block.html" class="callback">О нас</a></li>
+					<li>
+						<select id="myList">
+							<option>Аккаунт</option>
+							<option value="../Project1/Pages/Login.html">Войти</option>
+							<option value="../Project1/Pages/Registration.html">Регистрация</option>
+						</select>
+						<button onclick="gotoPage()">Перейти</button>
+						<script src="../Project1/JavaScript/script.js"></script>
+					</li>
 				</ul>
 			</div>
 		</div>
