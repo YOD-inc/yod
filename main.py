@@ -9,6 +9,7 @@ from sqlalchemy import select, literal_column, join
 from jose import JWTError, jwt
 from typing import List
 from fastapi.security import OAuth2PasswordBearer
+from typing import Optional
 
 
 
@@ -48,6 +49,7 @@ app.add_middleware(
 #         db.close()
 
 
+
 # # Функция для получения текущего пользователя из токена
 
 # def get_current_user(token: str = Depends(oauth2_scheme)):
@@ -74,10 +76,62 @@ app.add_middleware(
 
 # # Секретный ключ для подписи токена (в реальном приложении следует использовать более сложные меры безопасности)
 
-# SECRET_KEY = "your-secret-key"
-# ALGORITHM = "HS256"
+SECRET_KEY = "your-secret-key"
+ALGORITHM = "HS256"
 # ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
+# Dependency to get the current user from the database
+def get_current_user(token: str = Depends(OAuth2PasswordBearer(tokenUrl="token"))):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+
+    db = SessionLocal()
+    user = db.query(User).filter(User.username == username).first()
+    db.close()
+    if user is None:
+        raise credentials_exception
+    return user
+
+# OAuth2 scheme for token
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+# Function to create access token
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+# Route to get token
+@app.post("/token")
+async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
+    db = SessionLocal()
+    user = db.query(User).filter(User.username == form_data.username).first()
+    db.close()
+
+    if not user or user.password != form_data.password:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password. Неверное имя пользователя или пароль.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    token_data = {"sub": user.username, "user_role": user.user_role}
+    return {"access_token": create_access_token(token_data), "token_type": "bearer"}
+
+# Protected route
+@app.get("/protected")
+async def protected_route(current_user: User = Depends(get_current_user)):
+    return {"message": "You have access!", "user_role": current_user.user_role}
 
 # # Роут для аутентификации
 

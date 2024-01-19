@@ -67,21 +67,35 @@ async function login() {
 	const username = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
 
-	const data = {
-        user_name: username,
-        password: password
-    };
+	// const data = {
+    //     user_name: username,
+    //     password: password
+    // };
 
-    axios.post("http://127.0.0.1:8000/users/log", data)
-        .then(response => {
-            // document.getElementById("response").textContent = JSON.stringify(response.data);
-            alert("Вход выполнен успешно");
-        })
-        .catch(error => {
-            // console.error("Error posting data:", error);
-            alert("Возникла ошибка в момент входа.");
-        });
-		
+    // axios.post("http://127.0.0.1:8000/users/log", data)
+    //     .then(response => {
+    //         // document.getElementById("response").textContent = JSON.stringify(response.data);
+    //         alert("Вход выполнен успешно");
+    //     })
+    //     .catch(error => {
+    //         // console.error("Error posting data:", error);
+    //         alert("Возникла ошибка в момент входа.");
+    //     });
+
+
+	axios.post('http://127.0.0.1:8000/token', {
+		username: username,
+		password: password
+		})
+		.then(response => {
+			const token = response.data.access_token;
+			localStorage.setItem('access_token', token);
+			window.location.href = "../Pages/indexUser.html";
+		})
+		.catch(error => {
+			console.error('Ошибка аутентификации', error);
+		});
+
 }
 // 	// Отправка данных на сервер для аутентификации
 // 	const response = await fetch('/token', {
