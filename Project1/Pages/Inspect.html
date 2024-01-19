@@ -40,7 +40,11 @@
 		<div class="overflow"></div>
 	</div>
     <main>
-        <table>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../JavaScript/inspect_endpoints.js"></script>
+
+        <table id="inspect-table">
             <thead>
                 <tr>
                     <th>ID осмотра</th>
@@ -55,54 +59,71 @@
             </thead>
             <tbody>
                 <tr>
+                    <!-- <td>#</td>
                     <td>#</td>
                     <td>#</td>
                     <td>#</td>
                     <td>#</td>
                     <td>#</td>
                     <td>#</td>
-                    <td>#</td>
-                    <td>#</td>
+                    <td>#</td> -->
                 </tr>
             </tbody>
         </table> 
         <div class="add_del">
-            <div class="add-inspect-text"><br><br>
+            <div class="add-inspect-text">
+                    <br><br>
+
                 <label for="addplace">Место осмотра:</label>
-                <select>
-                    <option>Пункт 1</option>
-                </select><br><br>
+                <select id="addplace">
+                    <!-- <option>Пункт 1</option> -->
+                </select>
+                    <br><br>
+
                 <label for="adddate">Дата осмотра:</label>
-                <input id="adddate"  type="text" name="adddate"/><br><br>
+                <input id="adddate" type="text" name="adddate"/>
+                    <br><br>
+
                 <label for="adddoctor">Доктор:</label>
-                <select>
-                    <option>Пункт 1</option>
-                </select><br><br>
+                <select id="adddoctor">
+                    <!-- <option>Пункт 1</option> -->
+                </select>
+                    <br><br>
+
                 <label for="addpatient">Пациент:</label>
-                <select>
-                    <option>Пункт 1</option>
-                </select><br><br>
+                <select id="addpatient">
+                    <!-- <option>Пункт 1</option> -->
+                </select>
+                    <br><br>
+
                 <label for="addsymptoms">Симптомы:</label>
-                <select>
-                    <option>Пункт 1</option>
-                </select><br><br>
-                <label for="adddyagnos">Диагноз:</label>
-                <select>
-                    <option>Пункт 1</option>
-                </select><br><br>
+                <select id="addsymptoms">
+                    <!-- <option>Пункт 1</option> -->
+                </select>
+                    <br><br>
+
+                <label for="adddyagnosis">Диагноз:</label>
+                <select id="adddyagnosis">
+                    <!-- <option>Пункт 1</option> -->
+                </select>
+                    <br><br>
+
                 <label for="addprescriptions">Показания:</label>
                 <input id="addprescriptions"  type="text" name="addprescriptions", size="2"/>
             </div>
-            <button type="button" name="addinspectbutton", class="addinspectbutton">Сохранить доктора</button><br><br>
+            <button type="button" name="addinspectbutton", class="addinspectbutton", onclick="inspect_add()">Сохранить осмотр</button>
+                <br><br>
+
             <div class="del-inspect-text">
-                <div class="deldoctor">
+                <div class="delinspect">
                     <label for="delinspect">ID осмотра:</label>
-                    <select>
-                        <option>Пункт 1</option>
-                    </select>
+                    <!-- <select id="delinspect"> -->
+                        <!-- <option>Пункт 1</option> -->
+                    <!-- </select> -->
+                    <input id="delinspect"  type="text" name="delinspect", size="2"/>
                 </div>
             </div>
-            <button type="button" name="delinspectbutton", class="delinspectbutton">Удалить доктора</button>
+            <button type="button" name="delinspectbutton", class="delinspectbutton", onclick="inspect_delete()">Удалить осмотр</button>
         </div>
     </main>
 </body>

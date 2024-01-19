@@ -150,7 +150,30 @@
 					alt="Github icon"></a>
 			<a href="https://t.me/yydddiii"><img src="Images/telegram.png" class="icon-style" alt="Telegram icon"></a>
 		</div>
-		<div>
+		<div class="footer-text-right">
+			<style>
+				#shape {
+				width: 4vmin;
+				height: 4vmin;
+				background-color: black;
+				transition: width 0.5s, heigth 0.5s, border-radius 0.5s;
+				cursor: pointer;
+				}
+				#shape.round {
+					border-radius: 50%;
+				}
+			</style>
+			<div class="icon-style" id="shape" onclick="toggleShape()"></div>
+			<script>
+				function toggleShape() {
+					var shape = document.getElementById('shape');
+					if (shape.classList.contains('round')) {
+						shape.classList.remove('round');
+					} else {
+						shape.classList.add('round');
+					}
+				}
+			</script>
 		</div>
 	</div>
 </footer>

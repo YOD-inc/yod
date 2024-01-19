@@ -4,7 +4,7 @@
 <head>
     <link href="../CSS/style.css" rel="stylesheet">
 	<meta charset="utf-8">
-	<title>Доктора</title>
+	<title>Врачи</title>
 
     <link rel="stylesheet" href="../libs/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="../libs/bootstrap-grid.min.css">
@@ -34,29 +34,33 @@
 </head>
 
 <body>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../JavaScript/doctor_user_endpoints.js"></script>
+
     <div>
 		<div class="overflow"></div>
 	</div>
     <div class="name-pages">
-        Доктора
+        Врачи
     </div>
-    <table class="table-user">
+    <table class="table-user" id="doctor-table">
         <thead>
             <tr>
-                <th>ID доктора</th>
-                <th>ФИО доктора</th>
-                <th>Номер телефона</th>     
+                <!-- <th>ID врача</th> -->
+                <th>ФИО врача</th>
+                <!-- <th>Номер телефона</th>      -->
                 <th>Номер участка</th>
-                <th>Опыт работы</th> 
+                <!-- <th>Опыт работы</th>  -->
             </tr>
         </thead>
         <tbody>
             <tr>
+                <!-- <td>#</td>
                 <td>#</td>
                 <td>#</td>
                 <td>#</td>
-                <td>#</td>
-                <td>#</td>
+                <td>#</td> -->
             </tr>
         </tbody>
     </table> 

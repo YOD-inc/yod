@@ -41,11 +41,17 @@
 	</div>
 
     <main>
-        <table>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../JavaScript/patient_endpoints.js"></script>
+
+        <table id="patient-table">
             <thead>
                 <tr>
                     <th>ID пациента</th>
-                    <th>ФИО пациента</th>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
                     <th>Номер телефона</th>     
                     <th>Адрес проживания</th>
                     <th>Возраст</th> 
@@ -54,12 +60,12 @@
             </thead>
             <tbody>
                 <tr>
+                    <!-- <td>#</td>
                     <td>#</td>
                     <td>#</td>
                     <td>#</td>
                     <td>#</td>
-                    <td>#</td>
-                    <td>#</td>
+                    <td>#</td> -->
                 </tr>
             </tbody>
         </table> 
@@ -76,26 +82,33 @@
                 <input id="addpatro"  type="text" name="addpatro"/><br><br>
                 <label for="addphone">Номер телефона:</label>
                 <input id="addphone"  type="text" name="addphone"/><br><br>
-                <label for="addstreet">Адрес прожтивания:</label>
+                <label for="addstreet">Адрес проживания:</label>
                 <input id="addstreet"  type="text" name="addstreet"/><br><br>
                 <label for="addage">Возраст:</label>
                 <input id="addage"  type="text" name="addage", size="2"/><br><br>
                 <label for="addgender">Пол:</label>
 
-                <input type="checkbox" id="female" name="gender" value="female">
+                <!-- <input type="checkbox" id="female" name="gender" value="female">
                 <label for="female">Жен</label>
                 <input type="checkbox" id="male" name="gender" value="male">
-                <label for="male">Муж</label>
+                <label for="male">Муж</label> -->
+                <form>
+                    <input type="radio" id="male" name="gender" value="М">
+                    <label for="male">Муж</label>
+                    <input type="radio" id="female" name="gender" value="Ж">
+                    <label for="female">Жен</label>
+                </form>
+                  
 
             </div>
-            <button type="button" name="addpatientbutton", class="addpatientbutton">Сохранить пациента</button>
+            <button type="button" name="addpatientbutton", class="addpatientbutton", onclick="patient_add()">Сохранить пациента</button>
             <div class="del-patient-text"><br>
                 <div class="deldoctor">
                     <label for="delpatient">ID пациента:</label>
                     <input id="delpatient"  type="text" name="delpatient", size="2"/>
                 </div>
             </div>
-            <button type="button" name="delpatientbutton", class="delpatientbutton">Удалить пациента</button>
+            <button type="button" name="delpatientbutton", class="delpatientbutton", onclick="patient_delete()">Удалить пациента</button>
         </div>
     </main>
 </body>
