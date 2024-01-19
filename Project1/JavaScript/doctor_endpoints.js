@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
             response.data.doctor.forEach(item => {
                 const row = tableBody.insertRow();
                 row.insertCell(0).textContent = item.id;
-                // row.insertCell(1).textContent = item.last_n;
-                // row.insertCell(2).textContent = item.first_n;
-                // row.insertCell(3).textContent = item.patro_n;
-                row.insertCell(1).textContent = item.full_n;
-                row.insertCell(2).textContent = item.phone_n;
-                row.insertCell(3).textContent = item.block_id;
-                row.insertCell(4).textContent = item.exp;
+                row.insertCell(1).textContent = item.last_n;
+                row.insertCell(2).textContent = item.first_n;
+                row.insertCell(3).textContent = item.patro_n;
+                // row.insertCell(1).textContent = item.full_n;
+                row.insertCell(4).textContent = item.phone_num;
+                row.insertCell(5).textContent = item.block_id;
+                row.insertCell(6).textContent = item.exp;
             });
         })
         .catch(error => {
@@ -46,11 +46,11 @@ function doctor_add() {
         first_n: first_n,
         patro_n: patro_n,
         phone_num: phone_num,
-        block_id: first_n,
+        block_id: block_id,
         exp: exp
     };
 
-    axios.post("http://127.0.0.1:8000/doctors/add", data)
+    axios.post(`http://127.0.0.1:8000/doctors/add?last_n=${last_n}&first_n=${first_n}&patro_n=${patro_n}&phone_num=${phone_num}&block_id=${block_id}&exp=${exp}`)
         .then(response => {
             // document.getElementById("response").textContent = JSON.stringify(response.data);
             alert("Doctor added successfully. Врач добавлен успешно.");
@@ -72,7 +72,7 @@ function doctor_delete() {
         return;
     }
 
-    axios.delete(`http://127.0.0.1:8000/doctors/delete/{id}?id=${doctor_id}`)
+    axios.delete(`http://127.0.0.1:8000/doctors/delete/${doctor_id}`)
         .then(response => {
             alert("Doctor deleted successfully. Врач удален успешно.");
         })

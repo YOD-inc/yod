@@ -8,13 +8,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select, literal_column, join
 from jose import JWTError, jwt
 from typing import List
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from typing import Optional
-
+import json
 
 
 # Импортирование классов из файла
-from models import Doctor, Block, Diagnosis, Gender, Inspect, Patient, Place_Insp, Symptoms, User, UserCreate
+from models import Doctor, Block, Diagnosis, Gender, Inspect, Patient, Place_Insp, Symptoms, User
 
 
 # Подключение к PostgreSQL
@@ -220,28 +220,28 @@ async def get_user(user_name: str, password: str):
 
 # Для врачей
 
-# @app.get("/doctors", tags=["doctors"])
-# def get_all_doctors():
-#     db = SessionLocal()
-#     a = {"doctor": db.query(Doctor).all()}
-#     db.close()
-#     return a
-
 @app.get("/doctors", tags=["doctors"])
 def get_all_doctors():
     db = SessionLocal()
-    a = {"inspect_choice_doctor": db.query(
-        select([
-            Doctor.c.id,
-            (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('full_n'),
-            Doctor.c.phone_num,
-            Doctor.c.block_id,
-            Doctor.c.exp
-        ])
-        .select_from(Doctor)
-    )}
+    a = {"doctor": db.query(Doctor).all()}
     db.close()
     return a
+
+# @app.get("/doctors", tags=["doctors"])
+# def get_all_doctors():
+#     db = SessionLocal()
+#     a = {"inspect_choice_doctor": db.query(
+#         select([
+#             Doctor.c.id,
+#             (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('full_n'),
+#             Doctor.c.phone_num,
+#             Doctor.c.block_id,
+#             Doctor.c.exp
+#         ])
+#         .select_from(Doctor)
+#     )}
+#     db.close()
+#     return a
 
 @app.post("/doctors/add", tags=["doctors"])
 async def add_doctor(last_n: str, first_n: str, patro_n: str, phone_num: str, block_id: int, exp: int):
@@ -354,14 +354,29 @@ async def inspect_delete(id: int):
 @app.get("/inspect/choice_place", tags=["inspect choices"])
 def inspect_choice():
     db = SessionLocal()
-    a = {"inspect_choice_place": db.query(
-        select([
-            Place_Insp.c.place,
-        ])
-        .select_from(Place_Insp)
-    )}
-    db.close()
-    return a
+    # a = {"inspect_choice_place": db.query(
+    #     select([
+    #         Place_Insp.place,
+    #     ])
+    #     .select_from(Place_Insp)
+    # )}
+    # db.close()
+    # return a
+    a = {"inspect_choice_place": db.query(Place_Insp).all()}
+    # b = []
+    # for place_name in a["inspect_choice_place"]:
+    #     b.append({"place": place_name["place"]})
+    # c = {"inspect_choice_place": b}
+    # cc = json.dumps(c, indent=2)
+    # db.close()
+    
+    b = []
+    for Place_Insp in a:
+        b.append({
+            "place": Place_Insp.place
+        })
+    c = json.dumps(b, indent=2)
+    return c
 
 @app.get("/inspect/choice_doctor", tags=["inspect choices"])
 def doctor_choice():

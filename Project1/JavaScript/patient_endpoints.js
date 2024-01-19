@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.insertCell(3).textContent = item.patro_n;
                 row.insertCell(4).textContent = item.phone_num;
                 row.insertCell(5).textContent = item.address;
-                row.insertCell(6).textContent = item.age;
                 row.insertCell(6).textContent = item.gender_char;
+                row.insertCell(6).textContent = item.age;
             });
         })
         .catch(error => {
@@ -61,7 +61,7 @@ function patient_add() {
         gender: gender
     };
 
-    axios.post("http://127.0.0.1:8000/patients/add", data)
+    axios.post(`http://127.0.0.1:8000/patients/add?last_n=${last_n}&first_n=${first_n}&patro_n=${patro_n}&phone_num=${phone_num}&address=${address}&age=${age}&gender=${gender}`)
         .then(response => {
             // document.getElementById("response").textContent = JSON.stringify(response.data);
             alert("Patient added successfully. Пациент добавлен успешно.");
@@ -83,7 +83,7 @@ function patient_delete() {
         return;
     }
 
-    axios.delete(`http://127.0.0.1:8000/patients/delete/{id}?id=${patient_id}`)
+    axios.delete(`http://127.0.0.1:8000/patients/delete/${patient_id}`)
         .then(response => {
             alert("Patient deleted successfully. Пациент удален успешно.");
         })
