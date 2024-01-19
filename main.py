@@ -1,11 +1,15 @@
 # Импортирование библиотек
 from fastapi import FastAPI, Depends, HTTPException 
-from datetime import date
-from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table
+from datetime import date, datetime, timedelta
+from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, Boolean
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from sqlalchemy.ext.declarative import declarative_base
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select, literal_column, join
+from jose import JWTError, jwt
+from typing import List
+from fastapi.security import OAuth2PasswordBearer
+
 
 
 # Импортирование классов из файла
@@ -20,6 +24,10 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Создание веб-приложения
 app = FastAPI()
+
+
+# Зависимость для аутентификации
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 # Подключение CORS механизма
@@ -38,6 +46,70 @@ app.add_middleware(
 #         yield db
 #     finally:
 #         db.close()
+
+
+# # Функция для получения текущего пользователя из токена
+
+# def get_current_user(token: str = Depends(oauth2_scheme)):
+#     credentials_exception = HTTPException(
+#         status_code=401,
+#         detail="Could not validate credentials",
+#         headers={"WWW-Authenticate": "Bearer"},
+#     )
+#     try:
+#         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+#         username: str = payload.get("sub")
+#         if username is None:
+#             raise credentials_exception
+#     except JWTError:
+#         raise credentials_exception
+
+#     db = SessionLocal()
+#     user = db.query(User).filter(User.username == username).first()
+#     db.close()
+#     if user is None:
+#         raise credentials_exception
+#     return user
+
+
+# # Секретный ключ для подписи токена (в реальном приложении следует использовать более сложные меры безопасности)
+
+# SECRET_KEY = "your-secret-key"
+# ALGORITHM = "HS256"
+# ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+
+# # Роут для аутентификации
+
+# @app.post("/token")
+# async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+#     # Проведение аутентификации
+#     # ...
+
+#     # Генерация JWT токена
+#     expires_delta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+#     expires = datetime.utcnow() + expires_delta
+#     to_encode = {"sub": username, "exp": expires, "role": user.role}
+#     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+
+#     # return {"access_token": access_token, "token_type": "bearer"}
+#     return {"access_token": encoded_jwt, "token_type": "bearer", "expires_in": expires_delta.total_seconds()}
+
+# # Роут для обычных пользователей
+
+# @app.get("/users/me", response_model=User)
+# async def read_users_me(current_user: User = Depends(get_current_user)):
+#     return current_user
+
+
+# # Роут для модераторов
+
+# @app.get("/moderators/me", response_model=User)
+# async def read_moderators_me(current_user: User = Depends(get_current_user)):
+#     if current_user.role != "moderator":
+#         raise HTTPException(status_code=403, detail="You do not have access to this resource")
+#     return current_user
 
 
 # Запросы

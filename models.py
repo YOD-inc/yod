@@ -79,8 +79,8 @@ class User(Base):
     last_name = Column(String)
     first_name = Column(String)
     password = Column(String)
-    lvl = Column(Integer, default = 0)
     user_name = Column(String, unique=True)
+    lvl = Column(Integer, default = 0)
 
 
 # Определение моделей вводимых данных
