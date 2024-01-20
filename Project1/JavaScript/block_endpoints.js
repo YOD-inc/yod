@@ -37,7 +37,7 @@ function block_add() {
         block_num: block_num
     };
 
-    axios.post("http://127.0.0.1:8000/block/add", data)
+    axios.post(`http://127.0.0.1:8000/block/add?address=${address}&block_num=${block_num}`)
         .then(response => {
             // document.getElementById("response").textContent = JSON.stringify(response.data);
             alert("Block added successfully. Участок добавлен успешно.");
@@ -59,7 +59,7 @@ function block_delete() {
         return;
     }
 
-    axios.delete(`http://127.0.0.1:8000/block/delete/{id}?id=${block_id}`)
+    axios.delete(`http://127.0.0.1:8000/block/delete/${block_id}`)
         .then(response => {
             alert("Block deleted successfully. Участок удален успешно.");
         })
