@@ -51,17 +51,17 @@ function patient_add() {
         return;
     }
 
-    const data = {
-        last_n: last_n,
-        first_n: first_n,
-        patro_n: patro_n,
-        phone_num: phone_num,
-        address: address,
-        age: age,
-        gender: gender
-    };
+    // const data = {
+    //     last_n: last_n,
+    //     first_n: first_n,
+    //     patro_n: patro_n,
+    //     phone_num: phone_num,
+    //     address: address,
+    //     age: age,
+    //     gender: gender
+    // };
 
-    axios.post(`http://127.0.0.1:8000/patients/add?last_n=${last_n}&first_n=${first_n}&patro_n=${patro_n}&phone_num=${phone_num}&address=${address}&age=${age}&gender=${gender}`)
+    axios.post(`http://127.0.0.1:8000/patients/add?last_n=${last_n}&first_n=${first_n}&patro_n=${patro_n}&phone_num=${phone_num}&address=${address}&age=${age}&gender_char=${gender}`)
         .then(response => {
             // document.getElementById("response").textContent = JSON.stringify(response.data);
             alert("Patient added successfully. Пациент добавлен успешно.");

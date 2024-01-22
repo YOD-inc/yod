@@ -362,7 +362,9 @@ def inspect_choice():
     # )}
     # db.close()
     # return a
-    a = {"inspect_choice_place": db.query(Place_Insp).all()}
+
+    # a = {"inspect_choice_place": db.query(Place_Insp).all()}
+
     # b = []
     # for place_name in a["inspect_choice_place"]:
     #     b.append({"place": place_name["place"]})
@@ -370,25 +372,29 @@ def inspect_choice():
     # cc = json.dumps(c, indent=2)
     # db.close()
     
-    b = []
-    for Place_Insp in a:
-        b.append({
-            "place": Place_Insp.place
-        })
-    c = json.dumps(b, indent=2)
-    return c
+    # b = []
+    # for Place_Insp in a:
+    #     b.append({
+    #         "place": Place_Insp.place
+    #     })
+    # c = json.dumps(b, indent=2)
+    a = db.query(Place_Insp.place).all()
+    db.close()
+    return {"inspect_choice_place": a}
 
 @app.get("/inspect/choice_doctor", tags=["inspect choices"])
 def doctor_choice():
     db = SessionLocal()
-    a = {"inspect_choice_doctor": db.query(
-        select([
-            (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('doctor_full_n')
-        ])
-        .select_from(Doctor)
-    )}
+    # a = {"inspect_choice_doctor": db.query(
+    #     select([
+    #         (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('doctor_full_n')
+    #     ])
+    #     .select_from(Doctor)
+    # )}
+    doctors = db.query(Doctor).all()
+    full_names = [{"full_name": f"{doctor.last_n} {doctor.first_n}"} for doctor in doctors]
     db.close()
-    return a
+    return {"full_name": full_names}
 
 @app.get("/inspect/choice_patient", tags=["inspect choices"])
 def patient_choice():
