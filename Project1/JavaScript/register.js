@@ -91,11 +91,13 @@ async function login() {
 			const token = response.data.access_token;
 			localStorage.setItem('access_token', token);
 
-			window.location.href = "../Project1/Pages/indexUser.html";
+			alert("Вход произведен успешно.");
+			// window.location.href = "../Project1/Pages/indexUser.html";
 			// window.location.href = "../Pages/indexUser.html";
 
 		})
-		.catch(error => {
+		.catch(error => {                                                                                                                                                                                                                           
+
 			console.error('Ошибка аутентификации', error);
 		});
 
