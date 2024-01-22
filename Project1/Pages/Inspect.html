@@ -2,10 +2,13 @@
 <html lang='ru'>
 
 <head>
-    <link href="../CSS/style.css" rel="stylesheet">
 	<meta charset="utf-8">
 	<title>Осмотр</title>
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleeapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+    <link href="../CSS/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../libs/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="../libs/bootstrap-grid.min.css">
 
@@ -23,8 +26,8 @@
                     <li class="dropdown" id="myli">
                         <button onclick="toggleDropdown()" , class="dropbtn" id="mybtn">Аккаунт</button>
                         <div id="dropdown-content" class="dropdown-content">
-                            <a href="../Project1/Pages/Login.html">Войти</a>
-                            <a href="../Project1/Pages/Registration.html">Регистрация</a>
+                            <a href="../Pages/Login.html">Войти</a>
+                            <a href="../Pages/Registration.html">Регистрация</a>
                         </div>
                         <script src="../JavaScript/script.js"></script>
                     </li>
@@ -38,8 +41,8 @@
     <div>
 		<div class="overflow"></div>
 	</div>
+   
     <main>
-
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="../JavaScript/inspect_endpoints.js"></script>
 
@@ -71,31 +74,34 @@
         </table> 
         <div class="add_del">
             <div class="add-inspect-text">
-                    <br><br>
-
+                <div class="name-pages">
+                    Осмотр
+                </div>
+                    <br>
+                    
                 <label for="addplace">Место осмотра:</label>
                 <select id="addplace">
                     <!-- <option>Пункт 1</option> -->
                 </select>
-                    <br><br>
+                <br><br>
 
                 <label for="adddate">Дата осмотра:</label>
                 <input id="adddate" type="text" name="adddate"/>
                     <br><br>
 
-                <label for="adddoctor">Врач:</label>
+                    <label for="adddoctor">Врач:</label>
                 <select id="adddoctor">
                     <!-- <option>Пункт 1</option> -->
                 </select>
-                    <br><br>
-
+                <br><br>
+                
                 <label for="addpatient">Пациент:</label>
                 <select id="addpatient">
                     <!-- <option>Пункт 1</option> -->
                 </select>
                     <br><br>
 
-                <label for="addsymptoms">Симптомы:</label>
+                    <label for="addsymptoms">Симптомы:</label>
                 <select id="addsymptoms">
                     <!-- <option>Пункт 1</option> -->
                 </select>
@@ -109,8 +115,8 @@
 
                 <label for="addprescriptions">Показания:</label>
                 <input id="addprescriptions"  type="text" name="addprescriptions", size="2"/>
-            </div>
-            <button type="button" name="addinspectbutton", class="addinspectbutton", onclick="inspect_add()">Сохранить осмотр</button>
+            </div><br>
+            <button type="button" name="addinspectbutton", class="btn", onclick="inspect_add()">Сохранить осмотр</button>
                 <br><br>
 
             <div class="del-inspect-text">
@@ -121,8 +127,8 @@
                     <!-- </select> -->
                     <input id="delinspect"  type="text" name="delinspect", size="2"/>
                 </div>
-            </div>
-            <button type="button" name="delinspectbutton", class="delinspectbutton", onclick="inspect_delete()">Удалить осмотр</button>
+            </div><br>
+            <button type="button" name="delinspectbutton", class="btn", onclick="inspect_delete()">Удалить осмотр</button>
         </div>
     </main>
 </body>

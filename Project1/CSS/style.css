@@ -15,9 +15,9 @@ body {
 	/* background-color: #d9fcd9; */
 
 	background-image: url('https://i2.wp.com/files.123freevectors.com/wp-content/original/115325-abstract-blue-and-green-lights-background-image.jpg?w=500&q=95');
-  	background-size: cover;
-  	background-attachment: fixed; 
-  	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed; 
+	background-repeat: no-repeat;
 	
 	/* scrollbar-width: thin; */
 	margin-left: 0;
@@ -28,7 +28,48 @@ body {
 	min-height: 100vh;
 	flex-direction: column;
 
+
 }
+
+/* .cursor-dot,
+.cursor-dot-outline {
+	mix-blend-mode: normal;
+	pointer-events: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 50%;
+	opacity: 0;
+	position: fixed;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	-webkit-transition: opacity 0.32s ease-in-out, -webkit-transform 0.32s ease-in-out;
+	transition: opacity 0.32s ease-in-out, -webkit-transform 0.32s ease-in-out;
+	transition: opacity 0.32s ease-in-out, transform 0.32s ease-in-out;
+	transition: opacity 0.32s ease-in-out, transform 0.32s ease-in-out, -webkit-transform 0.32s ease-in-out;
+}
+
+.cursor-dot {
+	z-index: 99999999;
+	width: 8.0px;
+	height: 8.0px;
+	background-color: rgba(235, 66, 154, 0.77);
+	border: solid;
+	border-radius: 50%;
+	border-width: 0px;
+	border-color: #000;
+}
+
+.cursor-dot-outline {
+	z-index: 99999998;
+	width: 36px;
+	height: 36px;
+	background-color: rgba(169, 169, 222, 0.2);
+	border: solid;
+	border-radius: 50%;
+	border-width: 0px;
+	border-color: #000;
+} */
 
 main {
 	flex: 1;
@@ -208,21 +249,10 @@ td {
 	width: 320px;
 }
 
-.addblockbutton{
-	margin-top: 5px;
-	background: #797979;
-}
-
 .delblocktext{
 	width: 120px;
 	margin-top: 5px;
 }
-
-.delblockbutton{
-	margin-top: 5px;
-	background: #797979;
-}
-
 
 
 /*
@@ -254,16 +284,6 @@ td {
 	margin-top: 5px;
 }
 
-.deldoctorbutton{
-	margin-top: 5px;
-	background: #797979;
-}
-
-.adddoctorbutton{
-	margin-top: 5px;
-	background: #797979;
-}
-
 
 
 /*
@@ -279,16 +299,6 @@ td {
 	margin-top: 5px;
 }
 
-.delpatientbutton{
-	margin-top: 5px;
-	background: #797979;
-}
-
-.addpatientbutton{
-	margin-top: 5px;
-	background: #797979;
-}
-
 .name-pages{
 	color:black;
 	font-weight: 700;
@@ -302,23 +312,13 @@ td {
 Стили для осмотров
 */
 
- .add-inspect-text{
+.add-inspect-text{
 	width: 1000px;
 }
 
 .del-inspect-text{
 	width: 200px;
 	margin-top: 5px;
-}
-
-.delinspectbutton{
-	margin-top: 5px;
-	background: #ff4545;
-}
-
-.addinspectbutton{
-	margin-top: 5px;
-	background: #ff4545;
 }
 
 
@@ -452,4 +452,74 @@ a.menu:hover {
 .settings {
 	margin-left: 20px;
 	margin-top: 20px
+}
+
+.btn {
+	text-decoration: none;
+	color: #6b5770;
+	background-image: linear-gradient(90deg, #fd7f34, #bd155b);
+	display: inline-block;
+	padding: 6px 18px;
+	border: 2px solid;
+	position: relative;
+	z-index: 0;
+	border-radius: 5px;
+	box-sizing: border-box;
+	margin: 0 15px 15px 0;
+	outline: none;
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;
+}
+
+.btn:before {
+	content: '';
+	position: absolute;
+	left: -2px;
+	top: -2px;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	background: linear-gradient(90deg, #fd7f34, #bd155b);
+	z-index: -2;
+	transition: .4s;
+	border-radius: 5px;
+}
+
+.btn:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, #fff, #fff);
+	z-index: -1;
+	transition: .4s;
+	border-radius: 4px;
+}
+
+.btn:hover {
+	color: #fff;
+	transition: .3s;
+}
+
+.btn:hover:after {
+	background: linear-gradient(90deg, #fd7f34, #bd155b);
+}
+
+.btn:active:after {
+	background: linear-gradient(90deg, #d96d2d, #760f3a);
+}
+
+.btn:focus-visible {
+	box-shadow: 0 0 0 3px #fd7f34;
+}
+
+.btn:disabled {
+	pointer-events: none;
+}
+
+.btn:disabled:before {
+	filter: grayscale(100%);
 }

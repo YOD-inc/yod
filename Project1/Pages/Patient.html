@@ -23,8 +23,8 @@
                     <li class="dropdown" id="myli">
                         <button onclick="toggleDropdown()" , class="dropbtn" id="mybtn">Аккаунт</button>
                         <div id="dropdown-content" class="dropdown-content">
-                            <a href="../Project1/Pages/Login.html">Войти</a>
-                            <a href="../Project1/Pages/Registration.html">Регистрация</a>
+                            <a href="../Pages/Login.html">Войти</a>
+                            <a href="../Pages/Registration.html">Регистрация</a>
                         </div>
                         <script src="../JavaScript/script.js"></script>
                     </li>
@@ -97,15 +97,15 @@
                     <input type="radio" id="female" name="gender" value="ж">
                     <label for="female">Жен</label>
                 </form>             
-            </div>
-            <button type="button" name="addpatientbutton", class="addpatientbutton", onclick="patient_add()">Сохранить пациента</button>
+            </div><br>
+            <button type="button" name="addpatientbutton", class="btn", onclick="patient_add()">Сохранить пациента</button>
             <div class="del-patient-text"><br>
                 <div class="deldoctor">
                     <label for="delpatient">ID пациента:</label>
                     <input id="delpatient"  type="text" name="delpatient", size="2"/>
                 </div>
-            </div>
-            <button type="button" name="delpatientbutton", class="delpatientbutton", onclick="patient_delete()">Удалить пациента</button>
+            </div><br>
+            <button type="button" name="delpatientbutton", class="btn", onclick="patient_delete()">Удалить пациента</button>
         </div>
     </main>
 </body>
