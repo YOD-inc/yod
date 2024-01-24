@@ -44,7 +44,7 @@ function authorizationUser(){
 	const username = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
 
-	// let userData = JSON.parse(localStorage.getItem('userData'));
+	// let userData = JSON.parse(localStorage.('getItemuserData'));
 
 	if (!username || !password) {
         alert("Пожалуйста, введите все необходимые данные.");

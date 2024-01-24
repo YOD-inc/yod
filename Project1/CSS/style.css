@@ -151,13 +151,15 @@ main {
 
 .navbar-menu li {
 	display: inline-block;
-	/* font-weight: 700; */
+	font-weight: 700;
 	text-decoration: none;
 	color: #000;
 }
 
 .navbar-menu li a:hover {
 	opacity: 1;
+	color: #fff;
+	transition: .3s;
 }
 
 .navbar-wrap {
@@ -169,13 +171,13 @@ main {
 }
 
 .navbar-menu li a {
-	padding-right: 50px;
-	display:inline-block;
-	margin-left: 50px;
+	padding-right: 25px;
+	display:block;
+	margin-left: 25px;
 	text-decoration: none;
 	color: #000;
 	opacity: 0.6;
-	transition: all .07s ease-in-out;
+	/* transition: all .07s ease-in-out; */
 }
 
 .dropdown {
@@ -186,14 +188,84 @@ main {
 .dropdown-content {
 	display: none;
 	position: absolute;
-	background-color: #f9f9f9;
+	/* background-color: #f9f9f9; */
 	min-width: 160px;
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
-	z-index: 1;
+	/* z-index: 1; */
+
+	text-decoration: none;
+	color: #6b5770;
+	background-image: linear-gradient(90deg, #fd7f34, #bd155b);
+	/* display: inline-block; */
+	padding: 6px 18px;
+	border: 2px solid;
+	/* position: relative; */
+	z-index: 0;
+	border-radius: 5px;
+	box-sizing: border-box;
+	margin: 0 15px 15px 0;
+	outline: none;
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;
+	font-weight: 700;
 }
 
 .dropdown-content a:hover {
-	background-color: #f1f1f1;
+	color: #fff;
+	transition: .3s;
+}
+
+.dropdown-content:before {
+	content: '';
+	position: absolute;
+	left: -2px;
+	top: -2px;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	background: linear-gradient(90deg, #fd7f34, #bd155b);
+	z-index: -2;
+	transition: .4s;
+	border-radius: 5px;
+}
+
+.dropdown-content:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, #fff, #fff);
+	z-index: -1;
+	transition: .4s;
+	border-radius: 4px;
+}
+
+.dropdown-content:hover {
+	color: #fff;
+	transition: .3s;
+}
+
+.dropdown-content:hover:after {
+	background: linear-gradient(90deg, #fd7f34, #bd155b);
+}
+
+.dropdown-content:active:after {
+	background: linear-gradient(90deg, #d96d2d, #760f3a);
+}
+
+.dropdown-content:focus-visible {
+	box-shadow: 0 0 0 3px #fd7f34;
+}
+
+.dropdown-content:disabled {
+	pointer-events: none;
+}
+
+.dropdown-content:disabled:before {
+	filter: grayscale(100%);
 }
 
 .show {
@@ -471,6 +543,7 @@ a.menu:hover {
 	user-select: none;
 	appearance: none;
 	touch-action: manipulation;
+	font-weight: 700;
 }
 
 .btn:before {
