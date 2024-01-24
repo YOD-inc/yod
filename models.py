@@ -45,11 +45,11 @@ class Inspect(Base):
     __tablename__ = "inspect"
     id = Column(Integer, primary_key=True, index=True)
     place = Column(String)
-    date = Column(Date)
-    doctor = Column(Integer, ForeignKey("doctor.id"))
-    patient = Column(Integer, ForeignKey("patient.id"))
-    symptom_id = Column(String)
-    diagnosis_id = Column(String)
+    date = Column(String)
+    doctor = Column(String)
+    patient = Column(String)
+    symptom = Column(String)
+    diagnosis = Column(String)
     prescriptions = Column(String)
 
 class Patient(Base):

@@ -450,9 +450,9 @@ def get_all_inspect():
     return a
 
 @app.post("/inspect/add", tags=["inspect"])
-async def add_inspect(place: int, date: date, doctor: int, patient: int, symptom_id: int, diagnosis_id: int, prescriptions: str):
+async def add_inspect(place: str, date: str, doctor: str, patient: str, symptom: str, diagnosis: str, prescriptions: str):
     db = SessionLocal()
-    new_inspect = Inspect(place = place, date = date, doctor = doctor, patient = patient, symptom_id = symptom_id, diagnosis_id = diagnosis_id, prescriptions = prescriptions)
+    new_inspect = Inspect(place = place, date = date, doctor = doctor, patient = patient, symptom = symptom, diagnosis = diagnosis, prescriptions = prescriptions)
     db.add(new_inspect)
     db.commit()
     db.close()
@@ -466,9 +466,9 @@ async def inspect_delete(id: int):
     db.close()
     return{"message":"inspect ydalen"}
 
-@app.get("/inspect/choice_place", tags=["inspect choices"])
-def inspect_choice():
-    db = SessionLocal()
+# @app.get("/inspect/choice_place", tags=["inspect choices"])
+# def inspect_choice():
+#     db = SessionLocal()
     # a = {"inspect_choice_place": db.query(
     #     select([
     #         Place_Insp.place,
@@ -493,59 +493,59 @@ def inspect_choice():
     #         "place": Place_Insp.place
     #     })
     # c = json.dumps(b, indent=2)
-    a = db.query(Place_Insp.place).all()
-    db.close()
-    return {"inspect_choice_place": a}
+    # a = db.query(Place_Insp.place).all()
+    # db.close()
+    # return {"inspect_choice_place": a}
 
-@app.get("/inspect/choice_doctor", tags=["inspect choices"])
-def doctor_choice():
-    db = SessionLocal()
-    # a = {"inspect_choice_doctor": db.query(
-    #     select([
-    #         (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('doctor_full_n')
-    #     ])
-    #     .select_from(Doctor)
-    # )}
-    doctors = db.query(Doctor).all()
-    full_names = [{"full_name": f"{doctor.last_n} {doctor.first_n}"} for doctor in doctors]
-    db.close()
-    return {"full_name": full_names}
+# @app.get("/inspect/choice_doctor", tags=["inspect choices"])
+# def doctor_choice():
+#     db = SessionLocal()
+#     # a = {"inspect_choice_doctor": db.query(
+#     #     select([
+#     #         (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('doctor_full_n')
+#     #     ])
+#     #     .select_from(Doctor)
+#     # )}
+#     doctors = db.query(Doctor).all()
+#     full_names = [{"full_name": f"{doctor.last_n} {doctor.first_n}"} for doctor in doctors]
+#     db.close()
+#     return {"full_name": full_names}
 
-@app.get("/inspect/choice_patient", tags=["inspect choices"])
-def patient_choice():
-    db = SessionLocal()
-    a = {"inspect_choice_patient": db.query(
-        select([
-            (Patient.c.last_n + ' ' + Patient.c.first_n + ' ' + Patient.c.patro_n).label('patient_full_n')
-        ])
-        .select_from(Patient)
-    )}
-    db.close()
-    return a
+# @app.get("/inspect/choice_patient", tags=["inspect choices"])
+# def patient_choice():
+#     db = SessionLocal()
+#     a = {"inspect_choice_patient": db.query(
+#         select([
+#             (Patient.c.last_n + ' ' + Patient.c.first_n + ' ' + Patient.c.patro_n).label('patient_full_n')
+#         ])
+#         .select_from(Patient)
+#     )}
+#     db.close()
+#     return a
 
-@app.get("/inspect/choice_symptom", tags=["inspect choices"])
-def symptom_choice():
-    db = SessionLocal()
-    a = {"inspect_choice_symptom": db.query(
-        select([
-            Symptoms.c.symptom,
-        ])
-        .select_from(Symptoms)
-    )}
-    db.close()
-    return a
+# @app.get("/inspect/choice_symptom", tags=["inspect choices"])
+# def symptom_choice():
+#     db = SessionLocal()
+#     a = {"inspect_choice_symptom": db.query(
+#         select([
+#             Symptoms.c.symptom,
+#         ])
+#         .select_from(Symptoms)
+#     )}
+#     db.close()
+#     return a
 
-@app.get("/inspect/choice_diagnosis", tags=["inspect choices"])
-def diagnosis_choice():
-    db = SessionLocal()
-    a = {"inspect_choice_diagnosis": db.query(
-        select([
-            Diagnosis.c.diagnosis_name,
-        ])
-        .select_from(Diagnosis)
-    )}
-    db.close()
-    return a
+# @app.get("/inspect/choice_diagnosis", tags=["inspect choices"])
+# def diagnosis_choice():
+#     db = SessionLocal()
+#     a = {"inspect_choice_diagnosis": db.query(
+#         select([
+#             Diagnosis.c.diagnosis_name,
+#         ])
+#         .select_from(Diagnosis)
+#     )}
+#     db.close()
+#     return a
 
 
 # Для пациентов
