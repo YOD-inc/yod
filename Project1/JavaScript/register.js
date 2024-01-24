@@ -1,95 +1,100 @@
-function registerUser(){
-	const lastname = document.getElementById('Reglastn').value;
-	const firstname = document.getElementById('RegFirstn').value;
-	const username = document.getElementById('Regusername').value;
-	const password1 = document.getElementById('Regpassword1').value;
-	const password2 = document.getElementById('Regpassword2').value;
+// function registerUser(){
+// 	const lastname = document.getElementById('Reglastn').value;
+// 	const firstname = document.getElementById('RegFirstn').value;
+// 	const username = document.getElementById('Regusername').value;
+// 	const password1 = document.getElementById('Regpassword1').value;
+// 	const password2 = document.getElementById('Regpassword2').value;
 
-	if (!lastname || !firstname || !username || !password1 || !password2) {
-		alert("Пожалуйста, введите все необходимые данные.");
-		return;
-	}
+// 	if (!lastname || !firstname || !username || !password1 || !password2) {
+// 		alert("Пожалуйста, введите все необходимые данные.");
+// 		return;
+// 	}
 
-	if (password1 !== password2) {
-		alert("Пароли не совпадают");
-		return;
-	}
+// 	if (password1 !== password2) {
+// 		alert("Пароли не совпадают");
+// 		return;
+// 	}
 
-	// localStorage.setItem('userData', JSON.stringify({
-	// 	lastname: lastname,
-	// 	firstname: firstname,
-	// 	username: username,
-	// 	password: password1,}));
+// 	// localStorage.setItem('userData', JSON.stringify({
+// 	// 	lastname: lastname,
+// 	// 	firstname: firstname,
+// 	// 	username: username,
+// 	// 	password: password1,}));
 	
-	// alert("Регистрация прошла успешно");
+// 	// alert("Регистрация прошла успешно");
 
-	const data = {
-        last_name: lastname,
-        first_name: firstname,
-        password: password1,
-        user_name: username
-    };
+// 	const data = {
+//         last_name: lastname,
+//         first_name: firstname,
+//         password: password1,
+//         user_name: username
+//     };
 
-	axios.post("http://127.0.0.1:8000/users/reg", data)
-	.then(
-		alert("Регистрация прошла успешно")
-	)
-	.catch(
-		alert("Возникла ошибка в момент регистрации.")
-	);
-}
+// 	axios.post("http://127.0.0.1:8000/users/reg", data)
+// 	.then(
+// 		alert("Регистрация прошла успешно")
+// 	)
+// 	.catch(
+// 		alert("Возникла ошибка в момент регистрации.")
+// 	);
+// }
 
 
-function authorizationUser(){
+// function authorizationUser(){
+// 	const username = document.getElementById('username').value;
+// 	const password = document.getElementById('password').value;
+
+
+	// let userData = JSON.parse(localStorage.('getItemuserData'));
+
+// 	// let userData = JSON.parse(localStorage.getItem('userData'));
+
+
+// 	if (!username || !password) {
+//         alert("Пожалуйста, введите все необходимые данные.");
+//         return;
+//     }
+
+// 	// if (userData && userData.username === username && userData.password === password) {
+// 	// 	alert('Авторизация прошла успешно');
+// 	// 	window.location.href = "../Project1/Pages/indexUser.html";
+// 	// }
+// 	// else {
+// 	// 	alert('Имя пользователя или пароль не верны');
+// 	// }
+	
+
+// }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    axios.get("http://127.0.0.1:8000/pass")
+        .then(response => {
+            
+        })
+        .catch(error => {
+            // console.error("Error fetching data:", error);
+            alert("Error fetching data from database. Ошибка получения значений из базы данных.");
+        });
+});
+
+
+
+function login() {
 	const username = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
 
-	// let userData = JSON.parse(localStorage.('getItemuserData'));
+
 
 	if (!username || !password) {
         alert("Пожалуйста, введите все необходимые данные.");
         return;
     }
-
-	// if (userData && userData.username === username && userData.password === password) {
-	// 	alert('Авторизация прошла успешно');
-	// 	window.location.href = "../Project1/Pages/indexUser.html";
-	// }
-	// else {
-	// 	alert('Имя пользователя или пароль не верны');
-	// }
 	
-
-}
-
-
-async function login() {
-	const username = document.getElementById('username').value;
-	const password = document.getElementById('password').value;
-
-	// const data = {
-    //     user_name: username,
-    //     password: password
-    // };
-
-    // axios.post("http://127.0.0.1:8000/users/log", data)
-    //     .then(response => {
-    //         // document.getElementById("response").textContent = JSON.stringify(response.data);
-    //         alert("Вход выполнен успешно");
-    //     })
-    //     .catch(error => {
-    //         // console.error("Error posting data:", error);
-    //         alert("Возникла ошибка в момент входа.");
-    //     });
-
-
-	axios.post('http://127.0.0.1:8000/token', {
-		username: username,
-		password: password
-		})
+	axios.post(`http://127.0.0.1:8000/cookie?username=${username}&password=${password}`)
 		.then(response => {
-			const token = response.data.access_token;
-			localStorage.setItem('access_token', token);
+			// const token = response.data.access_token;
+			// localStorage.setItem('access_token', token);
 
 			alert("Вход произведен успешно.");
 			// window.location.href = "../Project1/Pages/indexUser.html";

@@ -45,11 +45,11 @@ class Inspect(Base):
     __tablename__ = "inspect"
     id = Column(Integer, primary_key=True, index=True)
     place = Column(String)
-    date = Column(Date)
-    doctor = Column(Integer, ForeignKey("doctor.id"))
-    patient = Column(Integer, ForeignKey("patient.id"))
-    symptom_id = Column(String)
-    diagnosis_id = Column(String)
+    date = Column(String)
+    doctor = Column(String)
+    patient = Column(String)
+    symptom = Column(String)
+    diagnosis = Column(String)
     prescriptions = Column(String)
 
 class Patient(Base):
@@ -82,41 +82,3 @@ class User(Base):
     user_name = Column(String, unique=True)
     lvl = Column(Integer, default = 0)
 
-
-# Определение моделей вводимых данных
-
-# class BlockCreate(BaseModel):
-#     address: str
-#     block_num: int
-
-# class DoctorCreate(BaseModel):
-#     last_n: str
-#     first_n: str
-#     patro_n: str
-#     phone_num: str
-#     block_id: int
-#     exp: int
-
-# class InspectCreate(BaseModel):
-#     place: str
-#     date: str
-#     doctor: str
-#     patient: str
-#     symptom: str
-#     diagnosis: str
-#     prescriptions: str
-
-# class Patient(BaseModel):
-#     last_n: str
-#     first_n: str
-#     patro_n: str
-#     phone_num: str
-#     address: str
-#     age: int
-#     gender_char: str
-
-# class UserCreate(BaseModel):
-#     last_name: str
-#     first_name: str
-#     password: str
-#     user_name: str

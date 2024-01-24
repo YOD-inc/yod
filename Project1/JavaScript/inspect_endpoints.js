@@ -24,65 +24,65 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Error fetching data from database. Ошибка получения значений из базы данных.");
         });
 
-    axios.get('http://127.0.0.1:8000/inspect/choice_place')
-        .then(function (response) {
-            var options = response.data.map(function(inspect_choice_place) {
-                return "<option value='" + inspect_choice_place.addplace + "'>" + inspect_choice_place.addplace + "</option>";
-            });
-            document.getElementById('addplace').innerHTML = options.join("");
-        })
-        .catch(function (error) {
-            // console.error('Error:', error);
-            alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_place");
-        });
+    // axios.get('http://127.0.0.1:8000/inspect/choice_place')
+    //     .then(function (response) {
+    //         var options = response.data.map(function(inspect_choice_place) {
+    //             return "<option value='" + inspect_choice_place.addplace + "'>" + inspect_choice_place.addplace + "</option>";
+    //         });
+    //         document.getElementById('addplace').innerHTML = options.join("");
+    //     })
+    //     .catch(function (error) {
+    //         // console.error('Error:', error);
+    //         alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_place");
+    //     });
 
-    axios.get('http://127.0.0.1:8000/inspect/choice_doctor')
-        .then(function (response) {
-            var options = response.data.map(function(inspect_choice_doctor) {
-                return "<option value='" + inspect_choice_doctor.adddoctor + "'>" + inspect_choice_doctor.adddoctor + "</option>";
-            });
-            document.getElementById('adddoctor').innerHTML = options.join("");
-        })
-        .catch(function (error) {
-            // console.error('Error:', error);
-            // alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_doctor");
-        });
+    // axios.get('http://127.0.0.1:8000/inspect/choice_doctor')
+    //     .then(function (response) {
+    //         var options = response.data.map(function(inspect_choice_doctor) {
+    //             return "<option value='" + inspect_choice_doctor.adddoctor + "'>" + inspect_choice_doctor.adddoctor + "</option>";
+    //         });
+    //         document.getElementById('adddoctor').innerHTML = options.join("");
+    //     })
+    //     .catch(function (error) {
+    //         // console.error('Error:', error);
+    //         // alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_doctor");
+    //     });
     
-    axios.get('http://127.0.0.1:8000/inspect/choice_patient')
-        .then(function (response) {
-            var options = response.data.map(function(inspect_choice_patient) {
-                return "<option value='" + inspect_choice_patient.addpatient + "'>" + inspect_choice_patient.addpatient + "</option>";
-            });
-            document.getElementById('addpatient').innerHTML = options.join("");
-        })
-        .catch(function (error) {
-            // console.error('Error:', error);
-            // alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_patient");
-        });
+    // axios.get('http://127.0.0.1:8000/inspect/choice_patient')
+    //     .then(function (response) {
+    //         var options = response.data.map(function(inspect_choice_patient) {
+    //             return "<option value='" + inspect_choice_patient.addpatient + "'>" + inspect_choice_patient.addpatient + "</option>";
+    //         });
+    //         document.getElementById('addpatient').innerHTML = options.join("");
+    //     })
+    //     .catch(function (error) {
+    //         // console.error('Error:', error);
+    //         // alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_patient");
+    //     });
 
-    axios.get('http://127.0.0.1:8000/inspect/choice_symptom')
-        .then(function (response) {
-            var options = response.data.map(function(inspect_choice_symptom) {
-                return "<option value='" + inspect_choice_symptom.addsymptom + "'>" + inspect_choice_symptom.addsymptom + "</option>";
-            });
-            document.getElementById('addsymptom').innerHTML = options.join("");
-        })
-        .catch(function (error) {
-            // console.error('Error:', error);
-            // alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_symptom");
-        });
+    // axios.get('http://127.0.0.1:8000/inspect/choice_symptom')
+    //     .then(function (response) {
+    //         var options = response.data.map(function(inspect_choice_symptom) {
+    //             return "<option value='" + inspect_choice_symptom.addsymptom + "'>" + inspect_choice_symptom.addsymptom + "</option>";
+    //         });
+    //         document.getElementById('addsymptom').innerHTML = options.join("");
+    //     })
+    //     .catch(function (error) {
+    //         // console.error('Error:', error);
+    //         // alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_symptom");
+    //     });
 
-    axios.get('http://127.0.0.1:8000/inspect/choice_diagnosis')
-        .then(function (response) {
-            var options = response.data.map(function(inspect_choice_diagnosis) {
-                return "<option value='" + inspect_choice_diagnosis.adddiagnosis + "'>" + inspect_choice_diagnosis.adddiagnosis + "</option>";
-            });
-            document.getElementById('adddiagnosis').innerHTML = options.join("");
-        })
-        .catch(function (error) {
-            // console.error('Error:', error);
-            // alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_doctor");
-        });
+    // axios.get('http://127.0.0.1:8000/inspect/choice_diagnosis')
+    //     .then(function (response) {
+    //         var options = response.data.map(function(inspect_choice_diagnosis) {
+    //             return "<option value='" + inspect_choice_diagnosis.adddiagnosis + "'>" + inspect_choice_diagnosis.adddiagnosis + "</option>";
+    //         });
+    //         document.getElementById('adddiagnosis').innerHTML = options.join("");
+    //     })
+    //     .catch(function (error) {
+    //         // console.error('Error:', error);
+    //         // alert("Error fetching data from database. Ошибка получения значений из базы данных. - choice_doctor");
+    //     });
 });
 
 

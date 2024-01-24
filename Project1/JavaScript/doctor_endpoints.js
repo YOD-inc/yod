@@ -41,14 +41,14 @@ function doctor_add() {
         return;
     }
 
-    const data = {
-        last_n: last_n,
-        first_n: first_n,
-        patro_n: patro_n,
-        phone_num: phone_num,
-        block_id: block_id,
-        exp: exp
-    };
+    // const data = {
+    //     last_n: last_n,
+    //     first_n: first_n,
+    //     patro_n: patro_n,
+    //     phone_num: phone_num,
+    //     block_id: block_id,
+    //     exp: exp
+    // };
 
     axios.post(`http://127.0.0.1:8000/doctors/add?last_n=${last_n}&first_n=${first_n}&patro_n=${patro_n}&phone_num=${phone_num}&block_id=${block_id}&exp=${exp}`)
         .then(response => {

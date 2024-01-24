@@ -80,45 +80,46 @@
                     <br>
                     
                 <label for="addplace">Место осмотра:</label>
-                <select id="addplace">
+                <!-- <select id="addplace"> -->
                     <!-- <option>Пункт 1</option> -->
-                </select>
-                <br><br>
+
+                <!-- </select> -->
+                <input id="addplace" type="text" name="addplace"/>
+                    <br><br>
+
 
                 <label for="adddate">Дата осмотра:</label>
                 <input id="adddate" type="text" name="adddate"/>
                     <br><br>
 
-                    <label for="adddoctor">Врач:</label>
-                <select id="adddoctor">
-                    <!-- <option>Пункт 1</option> -->
-                </select>
-                <br><br>
-                
+
+                <label for="adddoctor">Врач:</label>
+                <input id="adddoctor" type="text" name="adddoctor"/>
+                    <br><br>
+
+              
                 <label for="addpatient">Пациент:</label>
-                <select id="addpatient">
-                    <!-- <option>Пункт 1</option> -->
-                </select>
+                <input id="addpatient" type="text" name="addpatient"/>
                     <br><br>
 
-                    <label for="addsymptoms">Симптомы:</label>
-                <select id="addsymptoms">
-                    <!-- <option>Пункт 1</option> -->
-                </select>
+              
+                <label for="addsymptoms">Симптомы:</label>
+                <input id="addsymptoms" type="text" name="addsymptoms"/>
                     <br><br>
 
+              
                 <label for="adddyagnosis">Диагноз:</label>
-                <select id="adddyagnosis">
-                    <!-- <option>Пункт 1</option> -->
-                </select>
+                <input id="adddyagnosis" type="text" name="adddyagnosis"/>
                     <br><br>
 
                 <label for="addprescriptions">Показания:</label>
-                <input id="addprescriptions"  type="text" name="addprescriptions", size="2"/>
-            </div><br>
+
+                <input id="addprescriptions"  type="text" name="addprescriptions"/>
+            </div>
             <button type="button" name="addinspectbutton", class="btn", onclick="inspect_add()">Сохранить осмотр</button>
                 <br><br>
 
+          
             <div class="del-inspect-text">
                 <div class="delinspect">
                     <label for="delinspect">ID осмотра:</label>

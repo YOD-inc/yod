@@ -1,6 +1,6 @@
 # Импортирование библиотек
 
-from fastapi import FastAPI, Depends, HTTPException 
+from fastapi import FastAPI, Depends, HTTPException, Request, Cookie, Response
 from datetime import date, datetime, timedelta
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, Boolean
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
@@ -12,7 +12,7 @@ from typing import List
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm 
 from typing import Optional
 import json
-
+from passlib.context import CryptContext
 
 # Импортирование классов из файла
 
@@ -86,7 +86,9 @@ SECRET_KEY = "your-secret-key"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-
+@app.get("/pass")
+async def pas():
+    pass
 # Зависимость для получения текущего пользователя из базы данных
 
 def get_current_user(token: str = Depends(OAuth2PasswordBearer(tokenUrl="token"))):
@@ -125,21 +127,61 @@ def create_access_token(data: dict):
 
 # Route to get token
 
-@app.post("/token")
-async def login_for_access_token(form_data: Auth2PasswordRequestForm = Depends()):
+# def login_for_access_token(response:Response, token):
+#     response.set_cookie(key="access_token", value=f"Bearer {token[0]}", httponly=True)
+#     return  {"message": "куки установлены"}
+
+# @app.post("/cookie") 
+# async def login_for_access_token(response:Response, form_data: OAuth2PasswordRequestForm = Depends()):
+#     db = SessionLocal()
+#     user = db.query(User).filter(User.user_name == form_data.username).first()
+#     db.close() 
+
+#     if not user or user.password != form_data.password:
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Incorrect username or password. Неверное имя пользователя или пароль.",
+#             headers={"WWW-Authenticate": "Bearer"},
+#         )
+#     token_data = {"sub": user.user_name, "lvl": user.lvl}
+#     response.set_cookie(key="access_cookie", value=f"Bearer {create_access_token(token_data)}")
+#     return {"message": "куки установлены"}
+
+@app.post("/cookie") 
+async def login_for_access_token(response:Response, username:str, password:str):
     db = SessionLocal()
-    user = db.query(User).filter(User.user_name == form_data.username).first()
+    user = db.query(User).filter(User.user_name == username).first()
     db.close() 
 
-    if not user or user.password != form_data.password:
+    if not user or user.password != password:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password. Неверное имя пользователя или пароль.",
             headers={"WWW-Authenticate": "Bearer"},
         )
-
     token_data = {"sub": user.user_name, "lvl": user.lvl}
-    return {"access_token": create_access_token(token_data), "token_type": "bearer"}
+    response.set_cookie(key="access_cookie", value=f"Bearer {create_access_token(token_data)}")
+    return create_access_token(token_data)
+
+# @app.post("/cookie") 
+# async def login_for_access_token(response:Response, form_data: OAuth2PasswordRequestForm = Depends()):
+#     db = SessionLocal()
+#     user = db.query(User).filter(User.user_name == form_data.username).first()
+#     db.close() 
+#     if not user or user.password != form_data.password:
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Incorrect username or password. Неверное имя пользователя или пароль.",
+#             headers={"WWW-Authenticate": "Bearer"},
+#         )
+#     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+#     token = await token_generator(User.username, User.lvl, expires_delta=access_token_expires)
+
+#     response = RedirectResponse(url='/cookie', status_code=status.HTTP_303_SEE_OTHER)
+#     response.set_cookie(key="access_token", value=f"Bearer {token[0]}", httponly=True)
+#     return {"message": "куки установлены"}
+
+
 
 # Your user and roles models here
 
@@ -153,12 +195,12 @@ def verify_password(plain_password, hashed_password):
 def get_user(db, username: str):
     return db.query(User).filter(User.username == username).first()
 
-def create_access_token(data: dict, expires_delta: timedelta):
-    to_encode = data.copy()
-    expire = datetime.utcnow() + expires_delta
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+# def create_access_token(data: dict, expires_delta: timedelta):
+#     to_encode = data.copy()
+#     expire = datetime.utcnow() + expires_delta
+#     to_encode.update({"exp": expire})
+#     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+#     return encoded_jwt
 
 # @app.post("/token")
 # async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
@@ -408,9 +450,9 @@ def get_all_inspect():
     return a
 
 @app.post("/inspect/add", tags=["inspect"])
-async def add_inspect(place: int, date: date, doctor: int, patient: int, symptom_id: int, diagnosis_id: int, prescriptions: str):
+async def add_inspect(place: str, date: str, doctor: str, patient: str, symptom: str, diagnosis: str, prescriptions: str):
     db = SessionLocal()
-    new_inspect = Inspect(place = place, date = date, doctor = doctor, patient = patient, symptom_id = symptom_id, diagnosis_id = diagnosis_id, prescriptions = prescriptions)
+    new_inspect = Inspect(place = place, date = date, doctor = doctor, patient = patient, symptom = symptom, diagnosis = diagnosis, prescriptions = prescriptions)
     db.add(new_inspect)
     db.commit()
     db.close()
@@ -424,9 +466,9 @@ async def inspect_delete(id: int):
     db.close()
     return{"message":"inspect ydalen"}
 
-@app.get("/inspect/choice_place", tags=["inspect choices"])
-def inspect_choice():
-    db = SessionLocal()
+# @app.get("/inspect/choice_place", tags=["inspect choices"])
+# def inspect_choice():
+#     db = SessionLocal()
     # a = {"inspect_choice_place": db.query(
     #     select([
     #         Place_Insp.place,
@@ -451,59 +493,59 @@ def inspect_choice():
     #         "place": Place_Insp.place
     #     })
     # c = json.dumps(b, indent=2)
-    a = db.query(Place_Insp.place).all()
-    db.close()
-    return {"inspect_choice_place": a}
+    # a = db.query(Place_Insp.place).all()
+    # db.close()
+    # return {"inspect_choice_place": a}
 
-@app.get("/inspect/choice_doctor", tags=["inspect choices"])
-def doctor_choice():
-    db = SessionLocal()
-    # a = {"inspect_choice_doctor": db.query(
-    #     select([
-    #         (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('doctor_full_n')
-    #     ])
-    #     .select_from(Doctor)
-    # )}
-    doctors = db.query(Doctor).all()
-    full_names = [{"full_name": f"{doctor.last_n} {doctor.first_n}"} for doctor in doctors]
-    db.close()
-    return {"full_name": full_names}
+# @app.get("/inspect/choice_doctor", tags=["inspect choices"])
+# def doctor_choice():
+#     db = SessionLocal()
+#     # a = {"inspect_choice_doctor": db.query(
+#     #     select([
+#     #         (Doctor.c.last_n + ' ' + Doctor.c.first_n + ' ' + Doctor.c.patro_n).label('doctor_full_n')
+#     #     ])
+#     #     .select_from(Doctor)
+#     # )}
+#     doctors = db.query(Doctor).all()
+#     full_names = [{"full_name": f"{doctor.last_n} {doctor.first_n}"} for doctor in doctors]
+#     db.close()
+#     return {"full_name": full_names}
 
-@app.get("/inspect/choice_patient", tags=["inspect choices"])
-def patient_choice():
-    db = SessionLocal()
-    a = {"inspect_choice_patient": db.query(
-        select([
-            (Patient.c.last_n + ' ' + Patient.c.first_n + ' ' + Patient.c.patro_n).label('patient_full_n')
-        ])
-        .select_from(Patient)
-    )}
-    db.close()
-    return a
+# @app.get("/inspect/choice_patient", tags=["inspect choices"])
+# def patient_choice():
+#     db = SessionLocal()
+#     a = {"inspect_choice_patient": db.query(
+#         select([
+#             (Patient.c.last_n + ' ' + Patient.c.first_n + ' ' + Patient.c.patro_n).label('patient_full_n')
+#         ])
+#         .select_from(Patient)
+#     )}
+#     db.close()
+#     return a
 
-@app.get("/inspect/choice_symptom", tags=["inspect choices"])
-def symptom_choice():
-    db = SessionLocal()
-    a = {"inspect_choice_symptom": db.query(
-        select([
-            Symptoms.c.symptom,
-        ])
-        .select_from(Symptoms)
-    )}
-    db.close()
-    return a
+# @app.get("/inspect/choice_symptom", tags=["inspect choices"])
+# def symptom_choice():
+#     db = SessionLocal()
+#     a = {"inspect_choice_symptom": db.query(
+#         select([
+#             Symptoms.c.symptom,
+#         ])
+#         .select_from(Symptoms)
+#     )}
+#     db.close()
+#     return a
 
-@app.get("/inspect/choice_diagnosis", tags=["inspect choices"])
-def diagnosis_choice():
-    db = SessionLocal()
-    a = {"inspect_choice_diagnosis": db.query(
-        select([
-            Diagnosis.c.diagnosis_name,
-        ])
-        .select_from(Diagnosis)
-    )}
-    db.close()
-    return a
+# @app.get("/inspect/choice_diagnosis", tags=["inspect choices"])
+# def diagnosis_choice():
+#     db = SessionLocal()
+#     a = {"inspect_choice_diagnosis": db.query(
+#         select([
+#             Diagnosis.c.diagnosis_name,
+#         ])
+#         .select_from(Diagnosis)
+#     )}
+#     db.close()
+#     return a
 
 
 # Для пациентов
