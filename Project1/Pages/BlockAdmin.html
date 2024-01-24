@@ -16,15 +16,15 @@
             <a href="../indexAdmin.html"><img src="../Images/logo3.png" alt="Логотип больницы" class="logo"></a>
             <div class="navbar-wrap">
                 <ul class="navbar-menu">
-                    <li><a href="../Pages/BlockAdmin.html">Участки</a></li>
-                    <li><a href="../Pages/Inspect.html">Осмотр</a></li>
-                    <li><a href="../Pages/DoctorAdmin.html">Врачи</a></li>
-                    <li><a href="../Pages/Patient.html">Пациенты</a></li>
+                    <li class="btn"><a href="../Pages/BlockAdmin.html">Участки</a></li>
+                    <li class="btn"><a href="../Pages/Inspect.html">Осмотры</a></li>
+                    <li class="btn"><a href="../Pages/DoctorAdmin.html">Врачи</a></li>
+                    <li class="btn"><a href="../Pages/Patient.html">Пациенты</a></li>
                     <li class="dropdown" id="myli">
-                        <button onclick="toggleDropdown()" , class="dropbtn" id="mybtn">Аккаунт</button>
+                        <button onclick="toggleDropdown()" , class="btn" id="mybtn">Аккаунт</button>
                         <div id="dropdown-content" class="dropdown-content">
-                            <a href="../Project1/Pages/Login.html">Войти</a>
-                            <a href="../Project1/Pages/Registration.html">Регистрация</a>
+                            <a href="../Pages/Login.html">Войти</a>
+                            <a href="../Pages/Registration.html">Регистрация</a>
                         </div>
                         <script src="../JavaScript/script.js"></script>
                     </li>
@@ -68,17 +68,17 @@
                 <label for="addstreet">Адрес:</label>
                 <input id="addstreet"  type="text" name="addstreet"/><br><br>
                 <label for="addblock">Участок:</label>
-                <input id="addblock"  type="text" name="addblock", size="2"/>
+                <input id="addblock"  type="text" name="addblock", size="2"/><br><br>
             </div>  
-            <button type="button" name="addblockbutton", class="addblockbutton", onclick="block_add()">Сохранить адрес</button><br><br>
+            <button type="button" name="addblockbutton", class="btn", onclick="block_add()">Сохранить адрес</button><br><br>
             
             <div class="delblocktext">
                 <div class="delblock">
                     <label for="delblock">ID адреса:</label>
                     <input id="delblock"  type="text" name="delblock", size="2"/>
                 </div>
-            </div>
-            <button type="button" name="delblockbutton", class="delblockbutton", onclick="block_delete()">Удалить адрес</button>
+            </div><br>
+            <button type="button" name="delblockbutton", class="btn", onclick="block_delete()">Удалить адрес</button>
         </div>
     </main>
 </body>
