@@ -1,4 +1,5 @@
 # Импортирование библиотек
+
 from fastapi import FastAPI, Depends, HTTPException 
 from datetime import date, datetime, timedelta
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, Boolean
@@ -8,30 +9,35 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select, literal_column, join
 from jose import JWTError, jwt
 from typing import List
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm 
 from typing import Optional
 import json
 
 
 # Импортирование классов из файла
+
 from models import Doctor, Block, Diagnosis, Gender, Inspect, Patient, Place_Insp, Symptoms, User
 
 
 # Подключение к PostgreSQL
+
 engine = create_engine("postgresql://postgres:1234@localhost/new_db")
 # engine = create_engine("postgresql://postgres:admin@localhost/test_db")
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 # Создание веб-приложения
+
 app = FastAPI()
 
 
 # Зависимость для аутентификации
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 # Подключение CORS механизма
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -78,9 +84,11 @@ app.add_middleware(
 
 SECRET_KEY = "your-secret-key"
 ALGORITHM = "HS256"
-# ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-# Dependency to get the current user from the database
+
+# Зависимость для получения текущего пользователя из базы данных
+
 def get_current_user(token: str = Depends(OAuth2PasswordBearer(tokenUrl="token"))):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -102,21 +110,26 @@ def get_current_user(token: str = Depends(OAuth2PasswordBearer(tokenUrl="token")
         raise credentials_exception
     return user
 
+
 # OAuth2 scheme for token
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
 
 # Function to create access token
+
 def create_access_token(data: dict):
     to_encode = data.copy()
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
 # Route to get token
+
 @app.post("/token")
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
+async def login_for_access_token(form_data: Auth2PasswordRequestForm = Depends()):
     db = SessionLocal()
-    user = db.query(User).filter(User.username == form_data.username).first()
-    db.close()
+    user = db.query(User).filter(User.user_name == form_data.username).first()
+    db.close() 
 
     if not user or user.password != form_data.password:
         raise HTTPException(
@@ -125,13 +138,73 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    token_data = {"sub": user.username, "user_role": user.user_role}
+    token_data = {"sub": user.user_name, "lvl": user.lvl}
     return {"access_token": create_access_token(token_data), "token_type": "bearer"}
 
+# Your user and roles models here
+
+# Authentication and token generation
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
+
+def get_user(db, username: str):
+    return db.query(User).filter(User.username == username).first()
+
+def create_access_token(data: dict, expires_delta: timedelta):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + expires_delta
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+# @app.post("/token")
+# async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
+#     db = SessionLocal()
+#     user = get_user(db, form_data.username)
+#     if not user or not verify_password(form_data.password, user.password):
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Incorrect username or password",
+#             headers={"WWW-Authenticate": "Bearer"},
+#         )
+#     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+#     access_token = create_access_token(
+#         data={"sub": user.username, "role": user.role},
+#         expires_delta=access_token_expires,
+#     )
+#     return {"access_token": access_token, "token_type": "bearer"}
+
+
 # Protected route
+
+# @app.get("/protected")
+# async def protected_route(current_user: User = Depends(get_current_user)):
+#     return {"message": "You have access!", "lvl": current_user.lvl}
+
+# Example route with authentication required
 @app.get("/protected")
-async def protected_route(current_user: User = Depends(get_current_user)):
-    return {"message": "You have access!", "user_role": current_user.user_role}
+async def protected_route(token: str = Depends(oauth2_scheme)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        role: str = payload.get("role")
+        if username is None or role is None:
+            raise credentials_exception
+        token_data = TokenData(username=username, role=role)
+    except JWTError:
+        raise credentials_exception
+    user = get_user(db, username=token_data.username)
+    if user is None:
+        raise credentials_exception
+    return user
 
 # # Роут для аутентификации
 

@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.insertCell(2).textContent = item.date;
                 row.insertCell(3).textContent = item.doctor;
                 row.insertCell(4).textContent = item.patient;
-                row.insertCell(5).textContent = item.symptom;
-                row.insertCell(6).textContent = item.diagnosis;
+                row.insertCell(5).textContent = item.symptom_id;
+                row.insertCell(6).textContent = item.diagnosis_id;
                 row.insertCell(7).textContent = item.prescriptions;
             });
         })
