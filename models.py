@@ -42,7 +42,7 @@ class Gender(Base):
     
 
 class Inspect(Base):
-    __tablename__ = "inspect"
+    __tablename__ = "inspect_new"
     id = Column(Integer, primary_key=True, index=True)
     place = Column(String)
     date = Column(String)

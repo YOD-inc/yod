@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(error => {
-            // console.error("Error fetching data:", error);
             alert("Error fetching data from database. Ошибка получения значений из базы данных.");
         });
 });
