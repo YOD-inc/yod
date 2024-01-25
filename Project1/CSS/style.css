@@ -142,7 +142,7 @@ main {
 	/* list-style-type: none;
 	padding-left: 0;
 	margin-left: 0; */
-
+	margin-left: 100vmin;
 	-webkit-box-flex: 1;
     -webkit-flex-grow: 1;
     -moz-box-flex: 1;
@@ -292,7 +292,7 @@ table {
 }
 th {
 	padding: 10px 30px;
-	background: #ff0000;
+	background: rgb(184, 37, 44);
 	color: #000000;
 	border-right: 2px solid; 
 	border-left: 2px solid;
@@ -415,7 +415,7 @@ td {
 }
 
 .maintitle {
-	font-size: 4vmin;
+	font-size: 2vmin;
 	padding-left: 2%;
 	padding-top: 5%;
 	padding-right: 4%;
@@ -431,14 +431,14 @@ td {
 .main-title-history {
 	padding-top: 6%;
 	padding-left: 4%;
-	font-size: 4vmin;
+	font-size: 3vmin;
 	color: rgba(0, 0, 0, 0.897);
 	width: 60%;
 }
 
 .main-title-title_history {
 	padding: 4%;
-	font-size: 2vmin;
+	font-size: 1.5vmin;
 	text-align: justify;
 	color: rgba(0, 0, 0, 0.795);
 	/* width: 80%; */

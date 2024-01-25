@@ -7,15 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tableBody.innerHTML = "";
 
-            response.data.inspect_choice.forEach(item => {
+            response.data.inspect.forEach(item => {
                 const row = tableBody.insertRow();
                 row.insertCell(0).textContent = item.id;
                 row.insertCell(1).textContent = item.place;
                 row.insertCell(2).textContent = item.date;
                 row.insertCell(3).textContent = item.doctor;
                 row.insertCell(4).textContent = item.patient;
-                row.insertCell(5).textContent = item.symptom_id;
-                row.insertCell(6).textContent = item.diagnosis_id;
+                row.insertCell(5).textContent = item.symptom;
+                row.insertCell(6).textContent = item.diagnosis
                 row.insertCell(7).textContent = item.prescriptions;
             });
         })
@@ -148,7 +148,7 @@ function inspect_add() {
         prescriptions: prescriptions
     };
 
-    axios.post("http://127.0.0.1:8000/inspect/add", data)
+    axios.post(`http://127.0.0.1:8000/inspect/add?place=${place}&date=${date}&doctor=${doctor}&patient=${patient}&symptom=${symptom}&diagnosis=${diagnosis}&prescriptions=${prescriptions}`, data)
         .then(response => {
             // document.getElementById("response").textContent = JSON.stringify(response.data);
             alert("Block added successfully. Участок добавлен успешно.");
@@ -170,7 +170,7 @@ function inspect_delete() {
         return;
     }
 
-    axios.delete(`http://127.0.0.1:8000/inspect/delete/{id}?id=${inspect_id}`)
+    axios.delete(`http://127.0.0.1:8000/inspect/delete/${inspect_id}`)
         .then(response => {
             alert("Inspect deleted successfully. Осмотр удален успешно.");
         })
