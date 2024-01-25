@@ -15,11 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(error => {
-            // console.error("Error fetching data:", error);
             alert("Error fetching data from database. Ошибка получения значений из базы данных.");
         });
 });
-
 
 // Функция для добавления участков
 
@@ -39,11 +37,9 @@ function block_add() {
 
     axios.post(`http://127.0.0.1:8000/block/add?address=${address}&block_num=${block_num}`)
         .then(response => {
-            // document.getElementById("response").textContent = JSON.stringify(response.data);
             alert("Block added successfully. Участок добавлен успешно.");
         })
         .catch(error => {
-            // console.error("Error posting data:", error);
             alert("An error occurred. Возникла ошибка.");
         });
 }
@@ -64,7 +60,6 @@ function block_delete() {
             alert("Block deleted successfully. Участок удален успешно.");
         })
         .catch(error => {
-            // console.error("Error deleting user:", error);
             alert("An error occurred. Возникла ошибка.");
         });
 }

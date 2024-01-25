@@ -20,18 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(error => {
-            // console.error("Error fetching data:", error);
             alert("Error fetching data from database. Ошибка получения значений из базы данных.");
         });
 });
-
-// Гендер селект (если нижеследующее не сработает)
-// 
-// document.querySelector('form').addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     const gender = document.querySelector('input[name="gender"]:checked').value;
-//     console.log(gender); // You can then save this value in a const or use it as needed
-//   });
 
 // Функция для добавления пациентов
 
@@ -42,7 +33,6 @@ function patient_add() {
     const phone_num = document.getElementById("addphone").value;
     const address = document.getElementById("addstreet").value;
     const age = document.getElementById("addage").value;
-    // const gender = document.getElementById("addgender").value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
 
 
@@ -50,24 +40,11 @@ function patient_add() {
         alert("Please enter all the necessary data. Пожалуйста, введите все необходимые данные.");
         return;
     }
-
-    // const data = {
-    //     last_n: last_n,
-    //     first_n: first_n,
-    //     patro_n: patro_n,
-    //     phone_num: phone_num,
-    //     address: address,
-    //     age: age,
-    //     gender: gender
-    // };
-
     axios.post(`http://127.0.0.1:8000/patients/add?last_n=${last_n}&first_n=${first_n}&patro_n=${patro_n}&phone_num=${phone_num}&address=${address}&age=${age}&gender_char=${gender}`)
         .then(response => {
-            // document.getElementById("response").textContent = JSON.stringify(response.data);
             alert("Patient added successfully. Пациент добавлен успешно.");
         })
         .catch(error => {
-            // console.error("Error posting data:", error);
             alert("An error occurred. Возникла ошибка.");
         });
 }
@@ -88,7 +65,6 @@ function patient_delete() {
             alert("Patient deleted successfully. Пациент удален успешно.");
         })
         .catch(error => {
-            // console.error("Error deleting user:", error);
             alert("An error occurred. Возникла ошибка.");
         });
 }

@@ -13,14 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.insertCell(1).textContent = item.last_n;
                 row.insertCell(2).textContent = item.first_n;
                 row.insertCell(3).textContent = item.patro_n;
-                // row.insertCell(1).textContent = item.full_n;
                 row.insertCell(4).textContent = item.phone_num;
                 row.insertCell(5).textContent = item.block_id;
                 row.insertCell(6).textContent = item.exp;
             });
         })
         .catch(error => {
-            // console.error("Error fetching data:", error);
             alert("Error fetching data from database. Ошибка получения значений из базы данных.");
         });
 });
@@ -40,23 +38,11 @@ function doctor_add() {
         alert("Please enter all the necessary data. Пожалуйста, введите все необходимые данные.");
         return;
     }
-
-    // const data = {
-    //     last_n: last_n,
-    //     first_n: first_n,
-    //     patro_n: patro_n,
-    //     phone_num: phone_num,
-    //     block_id: block_id,
-    //     exp: exp
-    // };
-
     axios.post(`http://127.0.0.1:8000/doctors/add?last_n=${last_n}&first_n=${first_n}&patro_n=${patro_n}&phone_num=${phone_num}&block_id=${block_id}&exp=${exp}`)
         .then(response => {
-            // document.getElementById("response").textContent = JSON.stringify(response.data);
             alert("Doctor added successfully. Врач добавлен успешно.");
         })
         .catch(error => {
-            // console.error("Error posting data:", error);
             alert("An error occurred. Возникла ошибка.");
         });
 }
@@ -77,7 +63,6 @@ function doctor_delete() {
             alert("Doctor deleted successfully. Врач удален успешно.");
         })
         .catch(error => {
-            // console.error("Error deleting user:", error);
             alert("An error occurred. Возникла ошибка.");
         });
 }
